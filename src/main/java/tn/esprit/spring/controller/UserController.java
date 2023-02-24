@@ -31,7 +31,7 @@ public class UserController {
 	@PostMapping("/inscription")
 	@ResponseBody
 	public User addUser(@RequestBody User u) {
-		return userServ.inscription(u);
+		return userServ.ajoutuser(u);
 
 	}
 	

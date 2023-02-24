@@ -22,7 +22,7 @@ public class UserServiceImpl implements IUserservice {
 	FileDBRepository fileDBRepo;
 
 	@Override
-	public User inscription(User user) {
+	public User ajoutuser(User user) {
 		 return userRepo.save(user);
 	}
 

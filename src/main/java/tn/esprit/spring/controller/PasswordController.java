@@ -58,7 +58,7 @@ public class PasswordController {
 			user.setResetToken(UUID.randomUUID().toString());
 
 			// Save token to database
-			userService.inscription(user);
+			userService.ajoutuser(user);
 
 			String appUrl = request.getScheme() + "://" + request.getServerName();
 			
