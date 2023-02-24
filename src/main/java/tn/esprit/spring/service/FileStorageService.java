@@ -45,9 +45,5 @@ public class FileStorageService {
   public Stream<FileDB> getAllFiles() {
     return fileDBRepo.findAll().stream();
   }
-  public List<FileDB> getFileByannonce(Long id) {
-	  User t =userRepo.findById(id).orElse(null);
-	    return t.getFiles();
-	  }
- 
+
 }

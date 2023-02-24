@@ -18,7 +18,7 @@ public class UserServiceImpl implements IUserservice {
 	@Autowired
 	UserRepository userRepo;
 	@Autowired
-	FileDBRepository fileRepo;
+	FileDBRepository fileDBRepo;
 
 	@Override
 	public User inscription(User user) {
@@ -67,9 +67,9 @@ public class UserServiceImpl implements IUserservice {
 	public User affcterfileauuser(Long iduser,Long idfile) {
 		// TODO Auto-generated method stub
 		User u = userRepo.findById(iduser).orElse(null);
-		FileDB f = fileRepo.findById(idfile).orElse(null);
-		f.getUser().add(u);
-		fileRepo.save(f);
+		FileDB f = fileDBRepo.findById(idfile).orElse(null);
+		f.setUser(u);
+		fileDBRepo.save(f);
 		return u;
 	}
 

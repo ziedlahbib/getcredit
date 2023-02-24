@@ -52,9 +52,9 @@ public class FileDB implements Serializable {
   
   
   
-  @ManyToMany
+  @ManyToOne
   @JsonIgnore
-  private List<User> user;
+  private User user;
   
 
 

@@ -57,7 +57,11 @@ public class User implements Serializable {
 @JsonIgnore
 	private Role role;
 
-
+	private String nom;
+	
+	private String prenom;
+	
+	private String adresse;
 
 	private String tel;
 	
@@ -68,7 +72,7 @@ public class User implements Serializable {
 	private String password;
 
 
-	@ManyToMany(mappedBy="user")
+	@OneToMany(mappedBy="user")
 	@JsonIgnore
 	private List<FileDB> files;
 	
