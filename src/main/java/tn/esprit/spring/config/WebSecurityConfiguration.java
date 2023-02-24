@@ -19,6 +19,10 @@ import tn.esprit.spring.service.MyUserDetailsService;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 @Autowired
 private MyUserDetailsService userDetailsService;
+@Bean
+public BCryptPasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+}
 @Override
 protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 	
