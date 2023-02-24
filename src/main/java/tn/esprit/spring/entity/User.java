@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -77,5 +78,8 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="user")
 	@JsonIgnore
 	private List<FileDB> files;
+	
+	@OneToOne(mappedBy = "entrpreneur")
+	private Entreprise entreprise;
 	
 }
