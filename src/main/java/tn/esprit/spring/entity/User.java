@@ -79,7 +79,7 @@ public class User implements Serializable {
 	@JsonIgnore
 	private List<FileDB> files;
 	
-	@OneToOne(mappedBy = "entrpreneur")
+	@ManyToOne
 	private Entreprise entreprise;
 	
 }

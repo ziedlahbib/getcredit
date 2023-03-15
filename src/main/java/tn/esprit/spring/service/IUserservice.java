@@ -10,6 +10,7 @@ import tn.esprit.spring.entity.User;
 
 public interface IUserservice {
 	public User ajoutuser(User user);
+	public User updatepassword(User user ,Long idUser);
 	public User updateUser(User user, Long idUser);
 	public void deleteUser(Long idUser);
 	public User affichDetailUser(Long idUser);

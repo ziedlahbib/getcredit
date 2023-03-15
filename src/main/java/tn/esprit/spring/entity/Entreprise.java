@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,11 +29,11 @@ public class Entreprise  implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long userId;
+	private Long EntrpriseId;
 	private String nom;
 	private Long numfisc;
 	private String adresse;
-	@OneToOne
-	private User entrpreneur;
+	@OneToMany(mappedBy = "entreprise")
+	private List<User> agents;
 
 }

@@ -2,41 +2,63 @@ package tn.esprit.spring.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tn.esprit.spring.entity.Entreprise;
+import tn.esprit.spring.entity.User;
+import tn.esprit.spring.repository.EntrepriseRepository;
+import tn.esprit.spring.repository.UserRepository;
 
 @Service
 public class EntrepriseServiceImpl implements IEntrepriseservice {
-
+	@Autowired
+	EntrepriseRepository entrepriseRepo;
+	@Autowired
+	UserRepository userRepo;
 	@Override
 	public Entreprise AjoutEntreprise(Entreprise e) {
-		// TODO Auto-generated method stub
-		return null;
+		return entrepriseRepo.save(e);
 	}
 
 	@Override
-	public Entreprise UpdateEntreprise(Entreprise e) {
-		// TODO Auto-generated method stub
-		return null;
+	public Entreprise UpdateEntreprise(Entreprise e,Long idEntreprise) {
+		Entreprise en= entrepriseRepo.findById(idEntreprise).orElse(null);
+		en.setAdresse(e.getAdresse());
+		en.setNom(e.getNom());
+		en.setNumfisc(e.getNumfisc());
+		return en;
 	}
 
 	@Override
 	public void SupprimerEntreprise(Long idEnt) {
-		// TODO Auto-generated method stub
+		entrepriseRepo.deleteById(idEnt);
 		
 	}
 
 	@Override
 	public Entreprise AffichDetailEntreprise(Long idEnt) {
-		// TODO Auto-generated method stub
-		return null;
+		return entrepriseRepo.findById(idEnt).orElse(null);
 	}
 
 	@Override
 	public List<Entreprise> afiichListEntreprise() {
-		// TODO Auto-generated method stub
-		return null;
+		return entrepriseRepo.findAll();
+	}
+
+	@Override
+	public User affecteragentauentrprise(Long idUser, Long idEntreprise) {
+		User u =userRepo.findById(idUser).orElse(null);
+		Entreprise e= entrepriseRepo.findById(idEntreprise).orElse(null);
+			u.setEntreprise(e);
+		return userRepo.save(u);
+	}
+
+	@Override
+	public User desaffecteragentauentrprise(Long idUser) {
+		User u =userRepo.findById(idUser).orElse(null);
+			u.setEntreprise(null);
+		return userRepo.save(u);
 	}
 
 }

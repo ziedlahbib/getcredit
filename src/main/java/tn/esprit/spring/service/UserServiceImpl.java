@@ -33,14 +33,22 @@ public class UserServiceImpl implements IUserservice {
 		u.setTel(user.getTel());
 		u.setRole(user.getRole());
 		u.setEmail(user.getEmail());
-		
-
-		
-		
 		return userRepo.save(u);
 		
 	}
 
+
+	@Override
+	public User updatepassword(User user, Long idUser) {
+		User u = userRepo.findById(idUser).orElse(null);
+		u.setPassword(user.getPassword());
+		u.setResetToken(user.getResetToken());
+		u.setUserName(user.getUserName());
+		u.setTel(user.getTel());
+		u.setRole(user.getRole());
+		u.setEmail(user.getEmail());
+		return userRepo.save(u);
+	}
 	@Override
 	public void deleteUser(Long idUser) {
 
@@ -82,6 +90,7 @@ public class UserServiceImpl implements IUserservice {
 	public Optional<User> findUserByResetToken(String resetToken) {
 		return userRepo.findByResetToken(resetToken);
 	}
+
 	
 
 }

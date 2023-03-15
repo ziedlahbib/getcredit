@@ -32,7 +32,7 @@ auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);}
 protected void configure(HttpSecurity http) throws Exception {
 	
 	
-http.authorizeRequests() .antMatchers("/registration","/login").permitAll()
+http.authorizeRequests() .antMatchers("/registration","/login","/forgot","/reset").permitAll()
 
 //.antMatchers("/Assurance/get-assurance").access("hasRole('SUPERADMIN')")
 //.antMatchers("/get**}").access("hasRole('Client')")

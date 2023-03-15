@@ -24,14 +24,15 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import lombok.extern.slf4j.Slf4j;
 import tn.esprit.spring.entity.User;
+import tn.esprit.spring.repository.UserRepository;
 import tn.esprit.spring.service.EmailService;
 import tn.esprit.spring.service.UserServiceImpl;
 
 @CrossOrigin(origins = "http://localhost:4200/",exposedHeaders="Access-Control-Allow-Origin" )
 @RestController
-
+@Slf4j
 public class PasswordController {
 	
 	@Autowired
@@ -40,10 +41,11 @@ public class PasswordController {
 	@Autowired
 	private EmailService emailService;
 
+
 	BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 	
     // Process form submission from forgotPassword page
-	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
+	@RequestMapping(value = "/forgot", method = RequestMethod.PUT)
 	public String processForgotPasswordForm( @RequestParam("email") String userEmail, HttpServletRequest request) {
 
 		// Lookup user in database by e-mail
@@ -58,7 +60,7 @@ public class PasswordController {
 			user.setResetToken(UUID.randomUUID().toString());
 
 			// Save token to database
-			userService.ajoutuser(user);
+			userService.updateUser(user, user.getUserId());
 
 			String appUrl = request.getScheme() + "://" + request.getServerName();
 			
@@ -84,7 +86,7 @@ public class PasswordController {
 	// Process reset password form
 	@PutMapping("/reset")
 	@ResponseBody
-	public String setNewPassword(@RequestBody User u,@RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
+	public String setNewPassword(@RequestBody String pw,@RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
 
 		// Find the user associated with the reset token
 		Optional<User> user = userService.findUserByResetToken(requestParams.get("token"));
@@ -95,13 +97,13 @@ public class PasswordController {
 			User resetUser = user.get(); 
             
 			// Set new password    
-			resetUser.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
-            
+			resetUser.setPassword(bCryptPasswordEncoder.encode(pw));
+
 			// Set the reset token to null so it cannot be used again
 			resetUser.setResetToken(null);
 
 			// Save user
-			userService.updateUser(resetUser,resetUser.getUserId());
+			userService.updatepassword(resetUser,resetUser.getUserId());
 
 			// In order to set a model attribute on a redirect, we must use
 			// RedirectAttributes

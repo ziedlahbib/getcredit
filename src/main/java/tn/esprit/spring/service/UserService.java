@@ -29,8 +29,6 @@ public User findUserByUserName(String userName) {
 return userRepository.findByUserName(userName);
 }
 public User saveUser(User user) {
-Role e =new Role(RoleName.ADMIN);
 user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 user.setActive(true);
-user.setRole(e);
 return userRepository.save(user); }}
