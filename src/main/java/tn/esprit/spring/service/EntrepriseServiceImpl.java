@@ -28,7 +28,7 @@ public class EntrepriseServiceImpl implements IEntrepriseservice {
 		en.setAdresse(e.getAdresse());
 		en.setNom(e.getNom());
 		en.setNumfisc(e.getNumfisc());
-		return en;
+		return entrepriseRepo.save(en);
 	}
 
 	@Override

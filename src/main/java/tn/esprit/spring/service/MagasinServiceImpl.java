@@ -22,7 +22,7 @@ public class MagasinServiceImpl implements IMagasinservice {
 	public Magasin UpdateMagasin(Magasin e, Long idMagasin) {
 		Magasin m = magasinRepo.findById(idMagasin).orElse(null);
 		m.setAddresse(e.getAddresse());
-		return m;
+		return magasinRepo.save(m);
 	}
 
 	@Override
