@@ -46,40 +46,37 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private Long userId;
-	private String userName;
-	private Boolean active;
-
 	
-
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch
-	= FetchType.EAGER)
-@JsonIgnore
-	private Role role;
-
+	private String userName;
+	
 	private String nom;
 	
 	private String prenom;
 	
 	private String adresse;
-
+	
 	private String tel;
 	
-
 	private String email;
-
-
+	
 	private String password;
 	
 	private String resetToken;
-
-
+	
+	private Boolean active;
+	
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch
+	= FetchType.EAGER)
+	private Role role;
+	
 	@OneToMany(mappedBy="user")
 	@JsonIgnore
 	private List<FileDB> files;
 	
 	@ManyToOne
 	private Entreprise entreprise;
+	@OneToMany(mappedBy = "user")
+	private List<Credit> credits;
 	
 }

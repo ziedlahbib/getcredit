@@ -1,41 +1,36 @@
 package tn.esprit.spring.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Entreprise  implements Serializable {
 
+public class Produit implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long entrpriseId;
+	private Long produitId;
 	private String nom;
-	private Long numfisc;
-	private String adresse;
-	@OneToMany(mappedBy = "entreprise")
-	private List<User> agents;
-	@OneToMany(mappedBy = "entreprise")
-	private List<Magasin> magasins;
+	@Column(unique = true)
+	private String reference;
+	private Long prix;
+	@ManyToOne
+	private Magasin magasin;
 
 }
