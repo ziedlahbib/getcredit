@@ -26,8 +26,6 @@ import tn.esprit.spring.entity.User;
 public class UserController {
 	@Autowired
 	IUserservice userServ;
-//	@Autowired
-//	MyUserDetailsService userdetailservice;
 	@PostMapping("/inscription")
 	@ResponseBody
 	public User addUser(@RequestBody User u) {
@@ -59,7 +57,8 @@ public class UserController {
 	public List<User> getusers() {
 		return userServ.affichUser();
 
-	}@GetMapping("/get-userbyusername/{username}")
+	}
+	@GetMapping("/get-userbyusername/{username}")
 	@ResponseBody
 	public User getbyusername(@PathVariable("username") String username) {
 		return userServ.findbyusername(username);

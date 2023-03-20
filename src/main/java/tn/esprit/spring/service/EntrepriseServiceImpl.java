@@ -47,19 +47,6 @@ public class EntrepriseServiceImpl implements IEntrepriseservice {
 		return entrepriseRepo.findAll();
 	}
 
-	@Override
-	public User affecteragentauentrprise(Long idUser, Long idEntreprise) {
-		User u =userRepo.findById(idUser).orElse(null);
-		Entreprise e= entrepriseRepo.findById(idEntreprise).orElse(null);
-			u.setEntreprise(e);
-		return userRepo.save(u);
-	}
 
-	@Override
-	public User desaffecteragentauentrprise(Long idUser) {
-		User u =userRepo.findById(idUser).orElse(null);
-			u.setEntreprise(null);
-		return userRepo.save(u);
-	}
 
 }

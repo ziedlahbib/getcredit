@@ -13,8 +13,7 @@ public interface IEntrepriseservice {
 	public void SupprimerEntreprise(Long idEnt);
 	public Entreprise AffichDetailEntreprise(Long idEnt);
 	public List<Entreprise> afiichListEntreprise();
-	public User affecteragentauentrprise(Long idUser,Long idEntreprise);
-	public User desaffecteragentauentrprise(Long idUser);
+
 	
 
 }
