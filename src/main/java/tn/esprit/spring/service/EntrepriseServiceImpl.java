@@ -3,14 +3,15 @@ package tn.esprit.spring.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
+
+import Interface.IEntrepriseservice;
 import tn.esprit.spring.entity.Entreprise;
 import tn.esprit.spring.entity.User;
 import tn.esprit.spring.repository.EntrepriseRepository;
 import tn.esprit.spring.repository.UserRepository;
 
-@Service
+
 public class EntrepriseServiceImpl implements IEntrepriseservice {
 	@Autowired
 	EntrepriseRepository entrepriseRepo;

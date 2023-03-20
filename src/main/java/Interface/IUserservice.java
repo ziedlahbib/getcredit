@@ -1,13 +1,15 @@
-package tn.esprit.spring.service;
+package Interface;
 
 
 
 import java.util.List;
 import java.util.Optional;
 
-import tn.esprit.spring.entity.FileDB;
-import tn.esprit.spring.entity.User;
+import org.springframework.stereotype.Service;
 
+
+import tn.esprit.spring.entity.User;
+@Service
 public interface IUserservice {
 	public User ajoutuser(User user);
 	public User updatepassword(User user ,Long idUser);

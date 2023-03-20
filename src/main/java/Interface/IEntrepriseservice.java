@@ -1,10 +1,12 @@
-package tn.esprit.spring.service;
+package Interface;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import tn.esprit.spring.entity.Entreprise;
 import tn.esprit.spring.entity.User;
-
+@Service
 public interface IEntrepriseservice {
 	public Entreprise AjoutEntreprise(Entreprise e);
 	public Entreprise UpdateEntreprise(Entreprise e,Long idEntreprise);
