@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import tn.esprit.spring.entity.User;
 @Service
 public interface IUserservice {
-	public User ajoutuser(User user);
 	public User updatepassword(User user ,Long idUser);
 	public User updateUser(User user, Long idUser);
 	public void deleteUser(Long idUser);

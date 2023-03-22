@@ -10,22 +10,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import Interface.IUserservice;
+import lombok.extern.slf4j.Slf4j;
 import tn.esprit.spring.entity.FileDB;
 
 import tn.esprit.spring.entity.User;
 import tn.esprit.spring.repository.FileDBRepository;
 import tn.esprit.spring.repository.UserRepository;
 @Service
+@Slf4j
 public class UserServiceImpl implements IUserservice {
 	@Autowired
 	UserRepository userRepo;
 	@Autowired
 	FileDBRepository fileDBRepo;
-
-	@Override
-	public User ajoutuser(User user) {
-		 return userRepo.save(user);
-	}
 
 	@Override
 	public User updateUser(User user, Long idUser) {
@@ -47,7 +44,9 @@ public class UserServiceImpl implements IUserservice {
 	public User updatepassword(User user, Long idUser) {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		User u = userRepo.findById(idUser).orElse(null);
+		log.info("ccc"+u.getNom());
 		// Set new password    
+		
 		u.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
 		// Set the reset token to null so it cannot be used again
