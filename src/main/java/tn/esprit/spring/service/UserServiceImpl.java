@@ -6,6 +6,7 @@ import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import Interface.IUserservice;
@@ -44,8 +45,13 @@ public class UserServiceImpl implements IUserservice {
 
 	@Override
 	public User updatepassword(User user, Long idUser) {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		User u = userRepo.findById(idUser).orElse(null);
-		u.setPassword(user.getPassword());
+		// Set new password    
+		u.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
+		// Set the reset token to null so it cannot be used again
+		u.setResetToken(null);
 		u.setAdresse(user.getAdresse());
 		u.setEmail(user.getEmail());
 		u.setNom(user.getNom());
@@ -53,7 +59,6 @@ public class UserServiceImpl implements IUserservice {
 		u.setTel(user.getTel());
 		u.setUserName(user.getUserName());
 		u.setRole(user.getRole());	
-		u.setResetToken(user.getResetToken());
 		return userRepo.save(u);
 	}
 	@Override

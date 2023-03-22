@@ -26,13 +26,12 @@ import tn.esprit.spring.entity.User;
 public class UserController {
 	@Autowired
 	IUserservice userServ;
-	@PostMapping("/inscription")
+	@PutMapping("/update-password/{id-user}")
 	@ResponseBody
-	public User addUser(@RequestBody User u) {
-		return userServ.ajoutuser(u);
+	public User upadetepassword(@RequestBody User u,@PathVariable("id-user") Long iduser) {
+		return userServ.updatepassword(u, iduser);
 
 	}
-	
 
 	@PutMapping("/update-utilisateur/{id-user}")
 	@ResponseBody

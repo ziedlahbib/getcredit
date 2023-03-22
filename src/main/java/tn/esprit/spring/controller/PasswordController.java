@@ -86,7 +86,7 @@ public class PasswordController {
 	// Process reset password form
 	@PutMapping("/reset")
 	@ResponseBody
-	public String setNewPassword(@RequestBody String pw,@RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
+	public String setNewPassword(@RequestBody User us,@RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
 
 		// Find the user associated with the reset token
 		Optional<User> user = userService.findUserByResetToken(requestParams.get("token"));
@@ -97,13 +97,13 @@ public class PasswordController {
 			User resetUser = user.get(); 
             
 			// Set new password    
-			resetUser.setPassword(bCryptPasswordEncoder.encode(pw));
+			//resetUser.setPassword(bCryptPasswordEncoder.encode(us.getPassword()));
 
 			// Set the reset token to null so it cannot be used again
-			resetUser.setResetToken(null);
+			//resetUser.setResetToken(null);
 
 			// Save user
-			userService.updatepassword(resetUser,resetUser.getUserId());
+			userService.updatepassword(us,resetUser.getUserId());
 
 			// In order to set a model attribute on a redirect, we must use
 			// RedirectAttributes
