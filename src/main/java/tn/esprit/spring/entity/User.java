@@ -70,11 +70,11 @@ public class User implements Serializable {
 	
 	private Boolean active;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	  @JoinTable(  name = "user_roles", 
 	        joinColumns = @JoinColumn(name = "user_id"), 
 	        inverseJoinColumns = @JoinColumn(name = "role_id"))
-	  private Set<Role> roles = new HashSet<>();
+	  private Role roles ;
 	
 	@OneToMany(mappedBy="user")
 	@JsonIgnore

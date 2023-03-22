@@ -2,6 +2,8 @@ package request;
 
 import java.util.Set;
 
+import tn.esprit.spring.entity.Role;
+
 
 
 public class SignupRequest {
@@ -11,7 +13,7 @@ public class SignupRequest {
 
   private String email;
 
-  private Set<String> role;
+  private String role;
 
   private String password;
   
@@ -49,13 +51,6 @@ public class SignupRequest {
     this.password = password;
   }
 
-  public Set<String> getRole() {
-    return this.role;
-  }
-
-  public void setRole(Set<String> role) {
-    this.role = role;
-  }
 
 public String getNom() {
 	return nom;
@@ -96,5 +91,15 @@ public Boolean getActive() {
 public void setActive(Boolean active) {
 	this.active = active;
 }
+
+public String getRole() {
+	return role;
+}
+
+public void setRole(String role) {
+	this.role = role;
+}
+
+
   
 }

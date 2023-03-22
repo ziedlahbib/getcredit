@@ -33,6 +33,7 @@ public class UserServiceImpl implements IUserservice {
 		u.setPrenom(user.getPrenom());
 		u.setTel(user.getTel());
 		u.setUsername(user.getUsername());
+		u.setActive(user.getActive());
 		u.setResetToken(user.getResetToken());
 		return userRepo.save(u);
 		
