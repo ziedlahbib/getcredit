@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import tn.esprit.spring.entity.Credit;
 
 
-@Service
+
 public interface ICreditservice {
 	public Credit AjoutCredit(Credit e);
 	public Credit UpdateCredit(Credit e,Long idCredit);

@@ -10,6 +10,6 @@ import tn.esprit.spring.entity.Produit;
 
 @Repository
 public interface ProduitRepository extends JpaRepository<Produit, Long>{
-	boolean existsByGeneratedString(String generatedString);
+	//boolean existsByGeneratedString(String generatedString);
 
 }

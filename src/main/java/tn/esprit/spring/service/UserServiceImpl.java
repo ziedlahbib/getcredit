@@ -29,10 +29,14 @@ public class UserServiceImpl implements IUserservice {
 	@Override
 	public User updateUser(User user, Long idUser) {
 		User u = userRepo.findById(idUser).orElse(null);
-		u.setUserName(user.getUserName());
-		u.setTel(user.getTel());
-		u.setRole(user.getRole());
+		u.setAdresse(user.getAdresse());
 		u.setEmail(user.getEmail());
+		u.setNom(user.getNom());
+		u.setPrenom(user.getPrenom());
+		u.setTel(user.getTel());
+		u.setUserName(user.getUserName());
+		u.setRole(user.getRole());	
+		u.setResetToken(user.getResetToken());
 		return userRepo.save(u);
 		
 	}
@@ -42,11 +46,14 @@ public class UserServiceImpl implements IUserservice {
 	public User updatepassword(User user, Long idUser) {
 		User u = userRepo.findById(idUser).orElse(null);
 		u.setPassword(user.getPassword());
-		u.setResetToken(user.getResetToken());
-		u.setUserName(user.getUserName());
-		u.setTel(user.getTel());
-		u.setRole(user.getRole());
+		u.setAdresse(user.getAdresse());
 		u.setEmail(user.getEmail());
+		u.setNom(user.getNom());
+		u.setPrenom(user.getPrenom());
+		u.setTel(user.getTel());
+		u.setUserName(user.getUserName());
+		u.setRole(user.getRole());	
+		u.setResetToken(user.getResetToken());
 		return userRepo.save(u);
 	}
 	@Override

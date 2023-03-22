@@ -66,7 +66,7 @@ public class User implements Serializable {
 	
 	private Boolean active;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch
+	@OneToOne(cascade = CascadeType.PERSIST, fetch
 	= FetchType.EAGER)
 	private Role role;
 	
