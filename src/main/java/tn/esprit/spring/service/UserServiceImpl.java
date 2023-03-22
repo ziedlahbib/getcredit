@@ -32,8 +32,7 @@ public class UserServiceImpl implements IUserservice {
 		u.setNom(user.getNom());
 		u.setPrenom(user.getPrenom());
 		u.setTel(user.getTel());
-		u.setUserName(user.getUserName());
-		u.setRole(user.getRole());	
+		u.setUsername(user.getUsername());
 		u.setResetToken(user.getResetToken());
 		return userRepo.save(u);
 		
@@ -56,8 +55,7 @@ public class UserServiceImpl implements IUserservice {
 		u.setNom(user.getNom());
 		u.setPrenom(user.getPrenom());
 		u.setTel(user.getTel());
-		u.setUserName(user.getUserName());
-		u.setRole(user.getRole());	
+		u.setUsername(user.getUsername());	
 		return userRepo.save(u);
 	}
 	@Override
@@ -79,8 +77,8 @@ public class UserServiceImpl implements IUserservice {
 		return userRepo.findAll();
 	}
 	@Override
-	public User findbyusername(String username) {
-		return userRepo.findByUserName(username);
+	public Optional<User> findbyusername(String username) {
+		return userRepo.findByUsername(username);
 	}
 
 	@Override

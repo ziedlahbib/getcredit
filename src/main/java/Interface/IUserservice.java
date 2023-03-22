@@ -16,7 +16,7 @@ public interface IUserservice {
 	public void deleteUser(Long idUser);
 	public User affichDetailUser(Long idUser);
 	public List<User> affichUser();
-	public User findbyusername(String username);
+	public Optional<User> findbyusername(String username);
 	public User affcterfileauuser(Long iduser,Long idfile);
 	Optional<User> findUserByEmail(String email);
 	Optional<User> findUserByResetToken(String resetToken);

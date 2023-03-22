@@ -2,6 +2,7 @@ package tn.esprit.spring.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -13,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -21,6 +24,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.beans.factory.annotation.Value;
+
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -46,9 +50,9 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long userId;
+	private Long id;
 	
-	private String userName;
+	private String username;
 	
 	private String nom;
 	
@@ -66,9 +70,11 @@ public class User implements Serializable {
 	
 	private Boolean active;
 	
-	@OneToOne(cascade = CascadeType.PERSIST, fetch
-	= FetchType.EAGER)
-	private Role role;
+	@ManyToMany(fetch = FetchType.LAZY)
+	  @JoinTable(  name = "user_roles", 
+	        joinColumns = @JoinColumn(name = "user_id"), 
+	        inverseJoinColumns = @JoinColumn(name = "role_id"))
+	  private Set<Role> roles = new HashSet<>();
 	
 	@OneToMany(mappedBy="user")
 	@JsonIgnore
@@ -79,4 +85,9 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user")
 	private List<Credit> credits;
 	
+	  public User(String username, String email, String password) {
+		    this.username = username;
+		    this.email = email;
+		    this.password = password;
+		  }
 }

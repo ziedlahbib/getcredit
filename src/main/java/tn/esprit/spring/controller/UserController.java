@@ -1,7 +1,7 @@
 package tn.esprit.spring.controller;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -59,7 +59,7 @@ public class UserController {
 	}
 	@GetMapping("/get-userbyusername/{username}")
 	@ResponseBody
-	public User getbyusername(@PathVariable("username") String username) {
+	public Optional<User> getbyusername(@PathVariable("username") String username) {
 		return userServ.findbyusername(username);
 
 	}
