@@ -22,5 +22,7 @@ public interface IUserservice {
 	public User affcterfileauuser(Long iduser,Long idfile);
 	Optional<User> findUserByEmail(String email);
 	Optional<User> findUserByResetToken(String resetToken);
+	public User affecteruserauentreprise(Long iduser,Long ident);
+	public User affecteruseraumagasin(Long iduser,Long idmag);
 
 }

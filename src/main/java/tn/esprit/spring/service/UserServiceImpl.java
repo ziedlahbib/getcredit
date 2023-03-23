@@ -25,12 +25,16 @@ import lombok.extern.slf4j.Slf4j;
 import request.ChangePasswordRequest;
 import request.SignupRequest;
 import tn.esprit.spring.entity.ERole;
+import tn.esprit.spring.entity.Entreprise;
 import tn.esprit.spring.entity.FileDB;
+import tn.esprit.spring.entity.Magasin;
 import tn.esprit.spring.entity.Role;
 import tn.esprit.spring.entity.User;
+import tn.esprit.spring.repository.EntrepriseRepository;
 import tn.esprit.spring.repository.FileDBRepository;
 import tn.esprit.spring.repository.UserRepository;
 import tn.esprit.spring.repository.RoleRepository;
+import tn.esprit.spring.repository.MagasinRepository;
 
 import jwt.AuthEntryPointJwt;
 @Service
@@ -42,6 +46,10 @@ public class UserServiceImpl implements IUserservice {
 	FileDBRepository fileDBRepo;
 	@Autowired
 	RoleRepository roleRepository;
+	 @Autowired
+	 EntrepriseRepository entRepo;
+	 @Autowired
+	 MagasinRepository magRepo;
 
 	@Override
 	public User updateUser(SignupRequest signUpRequest, Long idUser) {
@@ -155,4 +163,23 @@ public class UserServiceImpl implements IUserservice {
 	        return new BCryptPasswordEncoder();
 	    }
 	 /////////////////////////////////////////////////
+	 
+
+
+	@Override
+	public User affecteruserauentreprise(Long iduser, Long ident) {
+		User u = userRepo.findById(iduser).orElse(null);
+		Entreprise e = entRepo.findById(ident).orElse(null);
+		u.setEntreprise(e);
+		return userRepo.save(u);
+	}
+
+
+	@Override
+	public User affecteruseraumagasin(Long iduser, Long idmag) {
+		User u = userRepo.findById(iduser).orElse(null);
+		Magasin m = magRepo.findById(idmag).orElse(null);
+		u.setMagasin(m);
+		return userRepo.save(u);
+	}
 }

@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,11 +31,8 @@ public class Magasin implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long magasinId;
 	private String addresse;
-
-	@ManyToOne
-	private Entreprise entreprise;
-	
 	@OneToMany(mappedBy = "magasin")
+	@JsonIgnore
 	private List<Produit> produits;
 
 }

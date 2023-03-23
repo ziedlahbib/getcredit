@@ -50,7 +50,7 @@ public class MagasinServiceImpl implements IMagasinservice {
 	public Magasin affectermagasinaentreprise(Long idmagasin, Long ident) {
 		Magasin m = magasinRepo.findById(idmagasin).orElse(null);
 		Entreprise e =entRepo.findById(ident).orElse(null);
-		m.setEntreprise(e);	
+		e.getMagasins().add(m);
 		return magasinRepo.save(m);
 	}
 
