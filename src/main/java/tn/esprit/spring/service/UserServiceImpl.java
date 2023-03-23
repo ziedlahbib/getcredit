@@ -4,18 +4,32 @@ package tn.esprit.spring.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMessage;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import Interface.IUserservice;
 import lombok.extern.slf4j.Slf4j;
+import request.ChangePasswordRequest;
 import tn.esprit.spring.entity.FileDB;
 
 import tn.esprit.spring.entity.User;
 import tn.esprit.spring.repository.FileDBRepository;
 import tn.esprit.spring.repository.UserRepository;
+
+import jwt.AuthEntryPointJwt;
 @Service
 @Slf4j
 public class UserServiceImpl implements IUserservice {
@@ -41,7 +55,7 @@ public class UserServiceImpl implements IUserservice {
 
 
 	@Override
-	public User updatepassword(User user, Long idUser) {
+	public User resetpassword(User user, Long idUser) {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		User u = userRepo.findById(idUser).orElse(null);
 		log.info("ccc"+u.getNom());
@@ -101,6 +115,34 @@ public class UserServiceImpl implements IUserservice {
 		return userRepo.findByResetToken(resetToken);
 	}
 
+
+	 public String updatepassword( ChangePasswordRequest changePasswordRequest, Long iduser) {
+		User u = userRepo.findById(iduser).orElse(null);
+	        if (verifyPassword(u, changePasswordRequest.getOldpassword())) {
+	        	u.setPassword(passwordEncoder().encode(changePasswordRequest.getNewpassword()));
+	    		u.setAdresse(u.getAdresse());
+	    		u.setEmail(u.getEmail());
+	    		u.setNom(u.getNom());
+	    		u.setPrenom(u.getPrenom());
+	    		u.setTel(u.getTel());
+	    		u.setUsername(u.getUsername());
+	    		u.setActive(u.getActive());
+	    		u.setResetToken(u.getResetToken());
+	        	userRepo.save(u);
+	        	return "Password updated successfully";
+
+	        }
+	        
+	        else {
+	            return "Invalid old password";
+	        }
+	   }
 	
 
+	 public boolean verifyPassword(User user, String password) {
+	        return passwordEncoder().matches(password, user.getPassword());
+	    }
+	 private PasswordEncoder passwordEncoder() {
+	        return new BCryptPasswordEncoder();
+	    }
 }

@@ -103,7 +103,7 @@ public class PasswordController {
 			//resetUser.setResetToken(null);
 
 			// Save user
-			userService.updatepassword(us,resetUser.getId());
+			userService.resetpassword(us,resetUser.getId());
 
 			// In order to set a model attribute on a redirect, we must use
 			// RedirectAttributes

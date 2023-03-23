@@ -7,11 +7,12 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-
+import request.ChangePasswordRequest;
 import tn.esprit.spring.entity.User;
 @Service
 public interface IUserservice {
-	public User updatepassword(User user ,Long idUser);
+	public String updatepassword(ChangePasswordRequest request ,Long idUser);
+	public User resetpassword(User user ,Long idUser);
 	public User updateUser(User user, Long idUser);
 	public void deleteUser(Long idUser);
 	public User affichDetailUser(Long idUser);
