@@ -61,7 +61,7 @@ public class MagasinController {
 	}
 	@PutMapping("/affecter-magasin-entreprise/{id-magasin}/{id-entreprise}")
 	@ResponseBody
-	public Magasin upadatemagasin(@PathVariable("id-magasin") Long idmagasin,@PathVariable("id-entreprise") Long idEnt) {
+	public Magasin affectermagasinentreprise(@PathVariable("id-magasin") Long idmagasin,@PathVariable("id-entreprise") Long idEnt) {
 		return magasinServ.affectermagasinaentreprise(idmagasin, idEnt);
 
 	}

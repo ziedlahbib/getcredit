@@ -15,5 +15,6 @@ public interface IProduitservice {
 	public void SupprimerProduit(Long idProduit);
 	public Produit AffichDetailProduit(Long idProduit );
 	public List<Produit> afiichListProduit();
+	public Produit affecterProduitMagasin(Long idProduit ,Long idMagasin);
 
 }
