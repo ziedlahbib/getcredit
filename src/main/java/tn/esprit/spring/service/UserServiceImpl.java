@@ -48,7 +48,7 @@ public class UserServiceImpl implements IUserservice {
 		u.setTel(user.getTel());
 		u.setUsername(user.getUsername());
 		u.setActive(user.getActive());
-		u.setResetToken(user.getResetToken());
+		u.setResetToken(u.getResetToken());
 		return userRepo.save(u);
 		
 	}
@@ -115,7 +115,7 @@ public class UserServiceImpl implements IUserservice {
 		return userRepo.findByResetToken(resetToken);
 	}
 
-
+/////////////////////
 	 public String updatepassword( ChangePasswordRequest changePasswordRequest, Long iduser) {
 		User u = userRepo.findById(iduser).orElse(null);
 	        if (verifyPassword(u, changePasswordRequest.getOldpassword())) {
@@ -145,4 +145,5 @@ public class UserServiceImpl implements IUserservice {
 	 private PasswordEncoder passwordEncoder() {
 	        return new BCryptPasswordEncoder();
 	    }
+	 /////////////////////////////////////////////////
 }
