@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Interface.IMagasinservice;
+import tn.esprit.spring.entity.Entreprise;
 import tn.esprit.spring.entity.Magasin;
+import tn.esprit.spring.repository.EntrepriseRepository;
 import tn.esprit.spring.repository.MagasinRepository;
 
 @Service
 public class MagasinServiceImpl implements IMagasinservice {
 	@Autowired
 	MagasinRepository magasinRepo;
+	@Autowired
+	EntrepriseRepository entRepo;
 
 	@Override
 	public Magasin AjoutMagasin(Magasin e) {
@@ -40,6 +44,14 @@ public class MagasinServiceImpl implements IMagasinservice {
 	@Override
 	public List<Magasin> afiichListMagasin() {
 		return magasinRepo.findAll();
+	}
+
+	@Override
+	public Magasin affectermagasinaentreprise(Long idmagasin, Long ident) {
+		Magasin m = magasinRepo.findById(idmagasin).orElse(null);
+		Entreprise e =entRepo.findById(ident).orElse(null);
+		m.setEntreprise(e);	
+		return magasinRepo.save(m);
 	}
 
 }

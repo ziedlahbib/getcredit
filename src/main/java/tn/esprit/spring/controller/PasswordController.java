@@ -60,7 +60,7 @@ public class PasswordController {
 			user.setResetToken(UUID.randomUUID().toString());
 
 			// Save token to database
-			userService.updateUser(user, user.getId());
+			userService.resetpassword(user);
 
 			String appUrl = request.getScheme() + "://" + request.getServerName();
 			
@@ -97,13 +97,13 @@ public class PasswordController {
 			User resetUser = user.get(); 
             
 			// Set new password    
-			//resetUser.setPassword(bCryptPasswordEncoder.encode(us.getPassword()));
+			resetUser.setPassword(bCryptPasswordEncoder.encode(us.getPassword()));
 
 			// Set the reset token to null so it cannot be used again
-			//resetUser.setResetToken(null);
+			resetUser.setResetToken(null);
 
 			// Save user
-			userService.resetpassword(us,resetUser.getId());
+			userService.resetpassword(resetUser);
 
 			// In order to set a model attribute on a redirect, we must use
 			// RedirectAttributes

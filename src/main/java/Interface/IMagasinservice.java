@@ -14,6 +14,7 @@ public interface IMagasinservice {
 	public void SupprimerMagasin(Long idMagasin);
 	public Magasin AffichDetailMagasin(Long idMagasin);
 	public List<Magasin> afiichListMagasin();
+	public Magasin affectermagasinaentreprise(Long idmagasin,Long iduser);
 
 
 }

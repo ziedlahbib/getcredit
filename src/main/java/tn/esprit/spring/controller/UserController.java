@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Interface.IUserservice;
 import request.ChangePasswordRequest;
+import request.SignupRequest;
 import tn.esprit.spring.entity.User;
 
 
@@ -38,8 +39,8 @@ public class UserController {
 
 	@PutMapping("/update-utilisateur/{id-user}")
 	@ResponseBody
-	public User upadeteutilisateur(@RequestBody User u,@PathVariable("id-user") Long iduser) {
-		return userServ.updateUser(u, iduser);
+	public User upadeteutilisateur(@RequestBody SignupRequest signUpRequest,@PathVariable("id-user") Long iduser) {
+		return userServ.updateUser(signUpRequest, iduser);
 
 	}
 	@DeleteMapping("/delete-user/{id-user}")

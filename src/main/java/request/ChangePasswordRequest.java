@@ -17,7 +17,9 @@ import tn.esprit.spring.entity.User;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChangePasswordRequest {
-
+	
+		
+	
 	  private String oldpassword;
 
 

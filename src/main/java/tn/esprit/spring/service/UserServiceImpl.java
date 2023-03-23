@@ -23,11 +23,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import Interface.IUserservice;
 import lombok.extern.slf4j.Slf4j;
 import request.ChangePasswordRequest;
+import request.SignupRequest;
+import tn.esprit.spring.entity.ERole;
 import tn.esprit.spring.entity.FileDB;
-
+import tn.esprit.spring.entity.Role;
 import tn.esprit.spring.entity.User;
 import tn.esprit.spring.repository.FileDBRepository;
 import tn.esprit.spring.repository.UserRepository;
+import tn.esprit.spring.repository.RoleRepository;
 
 import jwt.AuthEntryPointJwt;
 @Service
@@ -37,41 +40,55 @@ public class UserServiceImpl implements IUserservice {
 	UserRepository userRepo;
 	@Autowired
 	FileDBRepository fileDBRepo;
+	@Autowired
+	RoleRepository roleRepository;
 
 	@Override
-	public User updateUser(User user, Long idUser) {
+	public User updateUser(SignupRequest signUpRequest, Long idUser) {
 		User u = userRepo.findById(idUser).orElse(null);
-		u.setAdresse(user.getAdresse());
-		u.setEmail(user.getEmail());
-		u.setNom(user.getNom());
-		u.setPrenom(user.getPrenom());
-		u.setTel(user.getTel());
-		u.setUsername(user.getUsername());
-		u.setActive(user.getActive());
-		u.setResetToken(u.getResetToken());
-		return userRepo.save(u);
-		
+		u.setAdresse(signUpRequest.getAdresse());
+		u.setEmail(signUpRequest.getEmail());
+		u.setNom(signUpRequest.getNom());
+		u.setPrenom(signUpRequest.getPrenom());
+		u.setTel(signUpRequest.getTel());
+		u.setUsername(signUpRequest.getUsername());
+		u.setActive(signUpRequest.getActive());
+		String strRoles = signUpRequest.getRole();
+
+
+	    if (strRoles == null) {
+	      Role userRole = roleRepository.findByName(ERole.ROLE_AGENT)
+	          .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+	      u.setRoles(userRole);
+	    } else {
+
+	        switch (strRoles) {
+	        case "entrepreneur":
+	          Role entrepreneurRole = roleRepository.findByName(ERole.ROLE_ENTREPRENEUR)
+	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+	          u.setRoles(entrepreneurRole);
+
+	          break;
+	        case "admin":
+	          Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+	          u.setRoles(adminRole);
+
+	          break;
+	        default:
+	          Role agentRole = roleRepository.findByName(ERole.ROLE_AGENT)
+	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+	          u.setRoles(agentRole);;
+	        }
+
+	    }
+    	return userRepo.save(u);
 	}
 
 
 	@Override
-	public User resetpassword(User user, Long idUser) {
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		User u = userRepo.findById(idUser).orElse(null);
-		log.info("ccc"+u.getNom());
-		// Set new password    
-		
-		u.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-
-		// Set the reset token to null so it cannot be used again
-		u.setResetToken(null);
-		u.setAdresse(user.getAdresse());
-		u.setEmail(user.getEmail());
-		u.setNom(user.getNom());
-		u.setPrenom(user.getPrenom());
-		u.setTel(user.getTel());
-		u.setUsername(user.getUsername());	
-		return userRepo.save(u);
+	public User resetpassword(User user) {	
+		return userRepo.save(user);
 	}
 	@Override
 	public void deleteUser(Long idUser) {
@@ -120,14 +137,6 @@ public class UserServiceImpl implements IUserservice {
 		User u = userRepo.findById(iduser).orElse(null);
 	        if (verifyPassword(u, changePasswordRequest.getOldpassword())) {
 	        	u.setPassword(passwordEncoder().encode(changePasswordRequest.getNewpassword()));
-	    		u.setAdresse(u.getAdresse());
-	    		u.setEmail(u.getEmail());
-	    		u.setNom(u.getNom());
-	    		u.setPrenom(u.getPrenom());
-	    		u.setTel(u.getTel());
-	    		u.setUsername(u.getUsername());
-	    		u.setActive(u.getActive());
-	    		u.setResetToken(u.getResetToken());
 	        	userRepo.save(u);
 	        	return "Password updated successfully";
 

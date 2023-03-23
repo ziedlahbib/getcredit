@@ -59,4 +59,10 @@ public class MagasinController {
 		return magasinServ.afiichListMagasin();
 
 	}
+	@PutMapping("/affecter-magasin-entreprise/{id-magasin}/{id-entreprise}")
+	@ResponseBody
+	public Magasin upadatemagasin(@PathVariable("id-magasin") Long idmagasin,@PathVariable("id-entreprise") Long idEnt) {
+		return magasinServ.affectermagasinaentreprise(idmagasin, idEnt);
+
+	}
 }
