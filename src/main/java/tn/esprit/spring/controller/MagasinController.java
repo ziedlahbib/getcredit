@@ -65,4 +65,11 @@ public class MagasinController {
 		return magasinServ.affectermagasinaentreprise(idmagasin, idEnt);
 
 	}
+	
+	@GetMapping("/get-magasins/{id-entreprise}")
+	@ResponseBody
+	public List<Magasin> getmagasinsparEntreprise(@PathVariable("id-entreprise") Long idEnt) {
+		return magasinServ.getlistMagasinparEntreprise(idEnt);
+
+	}
 }

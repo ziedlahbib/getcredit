@@ -13,6 +13,9 @@ public interface IEntrepriseservice {
 	public void SupprimerEntreprise(Long idEnt);
 	public Entreprise AffichDetailEntreprise(Long idEnt);
 	public List<Entreprise> afiichListEntreprise();
+	public Entreprise getEntreprisedemagasin(Long idmag);
+	public Entreprise affecteruserauentreprise(Long iduser,Long ident);
+
 
 	
 

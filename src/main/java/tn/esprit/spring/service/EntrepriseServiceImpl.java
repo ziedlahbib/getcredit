@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import Interface.IEntrepriseservice;
 import tn.esprit.spring.entity.Entreprise;
+import tn.esprit.spring.entity.Magasin;
 import tn.esprit.spring.entity.User;
 import tn.esprit.spring.repository.EntrepriseRepository;
+import tn.esprit.spring.repository.MagasinRepository;
 import tn.esprit.spring.repository.UserRepository;
 
 @Service
@@ -17,6 +19,8 @@ public class EntrepriseServiceImpl implements IEntrepriseservice {
 	EntrepriseRepository entrepriseRepo;
 	@Autowired
 	UserRepository userRepo;
+	@Autowired
+	MagasinRepository magasinRepo;
 	@Override
 	public Entreprise AjoutEntreprise(Entreprise e) {
 		return entrepriseRepo.save(e);
@@ -46,6 +50,21 @@ public class EntrepriseServiceImpl implements IEntrepriseservice {
 	public List<Entreprise> afiichListEntreprise() {
 		return entrepriseRepo.findAll();
 	}
+
+	@Override
+	public Entreprise getEntreprisedemagasin(Long idmag) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Entreprise affecteruserauentreprise(Long iduser, Long ident) {
+		User u = userRepo.findById(iduser).orElse(null);
+		Entreprise e = entrepriseRepo.findById(ident).orElse(null);
+		u.getEntreprise().add(e);
+		return entrepriseRepo.save(e);
+	}
+
 
 
 

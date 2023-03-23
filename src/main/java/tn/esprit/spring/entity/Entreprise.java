@@ -35,10 +35,7 @@ public class Entreprise  implements Serializable {
 	private String nom;
 	private Long numfisc;
 	private String adresse;
-	@OneToMany(mappedBy = "entreprise")
-	@JsonIgnore
-	private List<User> agents;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "entreprise")
 	@JsonIgnore
 	private List<Magasin> magasins;
 

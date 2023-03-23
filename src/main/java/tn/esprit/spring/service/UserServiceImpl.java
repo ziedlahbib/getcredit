@@ -167,15 +167,6 @@ public class UserServiceImpl implements IUserservice {
 
 
 	@Override
-	public User affecteruserauentreprise(Long iduser, Long ident) {
-		User u = userRepo.findById(iduser).orElse(null);
-		Entreprise e = entRepo.findById(ident).orElse(null);
-		u.setEntreprise(e);
-		return userRepo.save(u);
-	}
-
-
-	@Override
 	public User affecteruseraumagasin(Long iduser, Long idmag) {
 		User u = userRepo.findById(iduser).orElse(null);
 		Magasin m = magRepo.findById(idmag).orElse(null);

@@ -31,8 +31,14 @@ public class Magasin implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long magasinId;
 	private String addresse;
+	
+	
 	@OneToMany(mappedBy = "magasin")
 	@JsonIgnore
 	private List<Produit> produits;
+	
+	@ManyToOne
+	@JsonIgnore
+	private Entreprise entreprise;
 
 }

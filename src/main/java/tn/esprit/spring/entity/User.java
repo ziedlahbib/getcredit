@@ -80,14 +80,16 @@ public class User implements Serializable {
 	@JsonIgnore
 	private List<FileDB> files;
 	
-	@ManyToOne
+	@OneToMany
 	@JsonIgnore
-	private Entreprise entreprise;
+	private List<Entreprise> entreprise;
 	
 	
 	@ManyToOne
 	@JsonIgnore
 	private Magasin magasin;
+	
+	
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private List<Credit> credits;

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Interface.IEntrepriseservice;
 import tn.esprit.spring.entity.Entreprise;
+import tn.esprit.spring.entity.User;
 
 
 
@@ -59,6 +60,12 @@ public class EntrepriseController {
 	@ResponseBody
 	public List<Entreprise> getEntreprises() {
 		return entrepriseService.afiichListEntreprise();
+
+	}
+	@PutMapping("/affecter-utilisateur-entreprise/{id-user}/{id-ent}")
+	@ResponseBody
+	public Entreprise affecteruserauentreprise(@PathVariable("id-user") Long iduser,@PathVariable("id-ent") Long ident) {
+		return entrepriseService.affecteruserauentreprise(iduser, ident);
 
 	}
 }

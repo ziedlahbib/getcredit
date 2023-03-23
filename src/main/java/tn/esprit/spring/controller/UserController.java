@@ -73,12 +73,7 @@ public class UserController {
 		return userServ.affcterfileauuser(iduser, idfile);
 
 	}
-	@PutMapping("/affecter-utilisateur-entreprise/{id-user}/{id-ent}")
-	@ResponseBody
-	public User affecteruserauentreprise(@PathVariable("id-user") Long iduser,@PathVariable("id-ent") Long ident) {
-		return userServ.affecteruserauentreprise(iduser, ident);
 
-	}
 	@PutMapping("/affecter-utilisateur-magasin/{id-user}/{id-mag}")
 	@ResponseBody
 	public User affecteruseraumagasin(@PathVariable("id-user") Long iduser,@PathVariable("id-mag") Long idmag) {
