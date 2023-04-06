@@ -173,4 +173,13 @@ public class UserServiceImpl implements IUserservice {
 		u.setMagasin(m);
 		return userRepo.save(u);
 	}
+
+
+	@Override
+	public User affecteragentauentrepreneur(Long idagent, Long ident) {
+		User a = userRepo.findById(idagent).orElse(null);
+		User ent = userRepo.findById(ident).orElse(null);
+		ent.getAgents().add(a);
+		return userRepo.save(ent);
+	}
 }

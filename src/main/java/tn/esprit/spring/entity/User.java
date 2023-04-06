@@ -70,7 +70,7 @@ public class User implements Serializable {
 	
 	private Boolean active;
 	
-	@ManyToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	  @JoinTable(  name = "user_roles", 
 	        joinColumns = @JoinColumn(name = "user_id"), 
 	        inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -79,6 +79,11 @@ public class User implements Serializable {
 	@OneToMany(mappedBy="user")
 	@JsonIgnore
 	private List<FileDB> files;
+	
+	
+	
+	@OneToMany
+	private List<User> agents;
 	
 	@OneToMany
 	@JsonIgnore

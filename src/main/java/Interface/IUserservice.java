@@ -23,5 +23,5 @@ public interface IUserservice {
 	Optional<User> findUserByEmail(String email);
 	Optional<User> findUserByResetToken(String resetToken);
 	public User affecteruseraumagasin(Long iduser,Long idmag);
-
+	public User affecteragentauentrepreneur(Long idagent,Long ident);
 }
