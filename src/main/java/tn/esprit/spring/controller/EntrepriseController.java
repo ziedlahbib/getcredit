@@ -62,6 +62,12 @@ public class EntrepriseController {
 		return entrepriseService.afiichListEntreprise();
 
 	}
+	@GetMapping("/get-entreprisesparuser/{id-user}")
+	@ResponseBody
+	public List<Entreprise> getEntreprisesparuser(@PathVariable("id-user") Long iduser) {
+		return entrepriseService.getEntrepriseparuser(iduser);
+
+	}
 	@PutMapping("/affecter-utilisateur-entreprise/{id-user}/{id-ent}")
 	@ResponseBody
 	public Entreprise affecteruserauentreprise(@PathVariable("id-user") Long iduser,@PathVariable("id-ent") Long ident) {

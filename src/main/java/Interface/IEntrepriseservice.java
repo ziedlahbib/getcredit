@@ -15,6 +15,7 @@ public interface IEntrepriseservice {
 	public List<Entreprise> afiichListEntreprise();
 	public Entreprise getEntreprisedemagasin(Long idmag);
 	public Entreprise affecteruserauentreprise(Long iduser,Long ident);
+	public List<Entreprise> getEntrepriseparuser(Long idUser);
 
 
 	

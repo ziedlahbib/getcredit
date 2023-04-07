@@ -65,6 +65,12 @@ public class EntrepriseServiceImpl implements IEntrepriseservice {
 		return entrepriseRepo.save(e);
 	}
 
+	@Override
+	public List<Entreprise> getEntrepriseparuser(Long idUser) {
+		User u =userRepo.findById(idUser).orElse(null);
+		return u.getEntreprise();
+	}
+
 
 
 
