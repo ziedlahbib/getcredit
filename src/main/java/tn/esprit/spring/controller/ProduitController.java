@@ -32,7 +32,7 @@ public class ProduitController {
 
 	}
 	
-	@PutMapping("/update-magasin/{id-produit}")
+	@PutMapping("/update-produit/{id-produit}")
 	@ResponseBody
 	public Produit upadateProduit(@RequestBody Produit u,@PathVariable("id-produit") Long idproduit) {
 		return produitServ.UpdateProduit(u, idproduit);
@@ -46,14 +46,14 @@ public class ProduitController {
 
 	}
 
-	@GetMapping("/get-produit/{id-magasin}")
+	@GetMapping("/get-produit/{id-produit}")
 	@ResponseBody
 	public Produit getProduitbyid(@PathVariable("id-produit") Long idproduit) {
 		return produitServ.AffichDetailProduit(idproduit);
 
 	}
 	
-	@GetMapping("/get-produit")
+	@GetMapping("/get-produits")
 	@ResponseBody
 	public List<Produit> geProduits() {
 		return produitServ.afiichListProduit();
