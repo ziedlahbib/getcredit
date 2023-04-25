@@ -24,4 +24,6 @@ public interface IUserservice {
 	Optional<User> findUserByResetToken(String resetToken);
 	public User affecteruseraumagasin(Long iduser,Long idmag);
 	public User affecteragentauentrepreneur(Long idagent,Long ident);
+	public List<User> getusersbyEntrepreneur(Long idEnt);
+	public List<User> getusersbyagent(Long idagent);
 }

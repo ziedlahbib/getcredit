@@ -182,4 +182,19 @@ public class UserServiceImpl implements IUserservice {
 		ent.getAgents().add(a);
 		return userRepo.save(ent);
 	}
+
+
+	@Override
+	public List<User> getusersbyEntrepreneur(Long idEnt) {
+		User ent = userRepo.findById(idEnt).orElse(null);
+		return ent.getAgents();
+	}
+
+
+	@Override
+	public List<User> getusersbyagent(Long idagent) {
+		User a = userRepo.findById(idagent).orElse(null);
+		User ent = a.getEntrepreneur();
+		return ent.getAgents();
+	}
 }

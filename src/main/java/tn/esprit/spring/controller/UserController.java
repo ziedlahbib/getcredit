@@ -80,4 +80,24 @@ public class UserController {
 		return userServ.affecteruseraumagasin(iduser, idmag);
 
 	}
+	@PutMapping("/affecter-utilisateur-entrepreneur/{id-user}/{id-ent}")
+	@ResponseBody
+	public User affecteruserauentrpreneur(@PathVariable("id-user") Long iduser,@PathVariable("id-ent") Long ident) {
+		return userServ.affecteragentauentrepreneur(iduser, ident);
+
+	}
+	@GetMapping("/get-userbyentrepreneur/{id-ent}")
+	@ResponseBody
+	public List<User> getbyuserbyentrepreneur(@PathVariable("id-ent") Long ident) {
+		return userServ.getusersbyEntrepreneur(ident);
+
+	}
+	
+	@GetMapping("/get-userbyagent/{id-agent}")
+	@ResponseBody
+	public List<User> getbyuserbyagent(@PathVariable("id-agent") Long idagent) {
+		return userServ.getusersbyagent(idagent);
+
+	}
+	
 }
