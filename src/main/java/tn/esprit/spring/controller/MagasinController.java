@@ -66,7 +66,7 @@ public class MagasinController {
 
 	}
 	
-	@GetMapping("/get-magasins/{id-entreprise}")
+	@GetMapping("/get-magasinsparentreprise/{id-entreprise}")
 	@ResponseBody
 	public List<Magasin> getmagasinsparEntreprise(@PathVariable("id-entreprise") Long idEnt) {
 		return magasinServ.getlistMagasinparEntreprise(idEnt);
