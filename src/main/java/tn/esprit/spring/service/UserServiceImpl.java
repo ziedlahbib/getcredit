@@ -179,8 +179,8 @@ public class UserServiceImpl implements IUserservice {
 	public User affecteragentauentrepreneur(Long idagent, Long ident) {
 		User a = userRepo.findById(idagent).orElse(null);
 		User ent = userRepo.findById(ident).orElse(null);
-		ent.getAgents().add(a);
-		return userRepo.save(ent);
+		a.setEntrepreneur(ent);
+		return userRepo.save(a);
 	}
 
 

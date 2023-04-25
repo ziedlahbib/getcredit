@@ -83,9 +83,11 @@ public class User implements Serializable {
 	
 	
 	@OneToMany(mappedBy="entrepreneur")
+	@JsonIgnore
 	private List<User> agents;
 	
 	@ManyToOne
+	@JsonIgnore
 	private User entrepreneur;
 	
 	@OneToMany
