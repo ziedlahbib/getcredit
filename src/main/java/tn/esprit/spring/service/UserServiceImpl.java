@@ -197,4 +197,11 @@ public class UserServiceImpl implements IUserservice {
 		User ent = a.getEntrepreneur();
 		return ent.getAgents();
 	}
+
+
+	@Override
+	public List<User> getusersbymagasin(Long idmagasin) {
+		
+		return userRepo.userparmagasin(idmagasin) ;
+	}
 }

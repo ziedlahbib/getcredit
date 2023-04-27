@@ -99,5 +99,11 @@ public class UserController {
 		return userServ.getusersbyagent(idagent);
 
 	}
+	@GetMapping("/get-userbymagasin/{id-mag}")
+	@ResponseBody
+	public List<User> getbyuserbymagasin(@PathVariable("id-mag") Long idmagasin) {
+		return userServ.getusersbymagasin(idmagasin);
+
+	}
 	
 }

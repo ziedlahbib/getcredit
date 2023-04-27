@@ -1,8 +1,11 @@
 package tn.esprit.spring.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import tn.esprit.spring.entity.User;
@@ -18,5 +21,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	  Boolean existsByEmail(String email);
 	Optional<User> findByResetToken(String resetToken);
 	Optional<User> findByEmail(String email);
+	@Query("Select u FROM User u join u.magasin m where m.magasinId = :magasinId")
+	List<User> userparmagasin(@Param("magasinId") Long magasinId);
 
 }

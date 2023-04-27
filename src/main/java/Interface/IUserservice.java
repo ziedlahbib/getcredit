@@ -26,4 +26,5 @@ public interface IUserservice {
 	public User affecteragentauentrepreneur(Long idagent,Long ident);
 	public List<User> getusersbyEntrepreneur(Long idEnt);
 	public List<User> getusersbyagent(Long idagent);
+	public List<User> getusersbymagasin(Long idmagasin);
 }
