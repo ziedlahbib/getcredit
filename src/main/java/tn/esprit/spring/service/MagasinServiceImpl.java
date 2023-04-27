@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import Interface.IMagasinservice;
 import tn.esprit.spring.entity.Entreprise;
 import tn.esprit.spring.entity.Magasin;
+import tn.esprit.spring.entity.User;
 import tn.esprit.spring.repository.EntrepriseRepository;
 import tn.esprit.spring.repository.MagasinRepository;
+import tn.esprit.spring.repository.UserRepository;
 
 @Service
 public class MagasinServiceImpl implements IMagasinservice {
@@ -17,6 +19,9 @@ public class MagasinServiceImpl implements IMagasinservice {
 	MagasinRepository magasinRepo;
 	@Autowired
 	EntrepriseRepository entRepo;
+	
+	@Autowired
+	UserRepository userRepo;
 
 	@Override
 	public Magasin AjoutMagasin(Magasin e) {
@@ -58,6 +63,19 @@ public class MagasinServiceImpl implements IMagasinservice {
 	public List<Magasin> getlistMagasinparEntreprise(Long idEnt) {
 		Entreprise e =entRepo.findById(idEnt).orElse(null);
 		return e.getMagasins();
+	}
+
+	@Override
+	public Magasin getmagasinbyagent(Long idUser) {
+		User u = userRepo.findById(idUser).orElse(null);
+		return u.getMagasin();
+	}
+
+	@Override
+	public List<Magasin> getListMagasinByUser(Long idUser) {
+		User u = userRepo.findById(idUser).orElse(null);
+		
+		return u.getMagasin().getEntreprise().getMagasins();
 	}
 
 }

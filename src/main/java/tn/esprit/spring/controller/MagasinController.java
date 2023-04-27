@@ -72,4 +72,10 @@ public class MagasinController {
 		return magasinServ.getlistMagasinparEntreprise(idEnt);
 
 	}
+	@GetMapping("/get-magasinsbyuser/{id-user}")
+	@ResponseBody
+	public List<Magasin> getmagasinsparUser(@PathVariable("id-user") Long idUser) {
+		return magasinServ.getListMagasinByUser(idUser);
+
+	}
 }

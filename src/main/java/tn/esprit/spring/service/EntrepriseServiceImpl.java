@@ -66,9 +66,15 @@ public class EntrepriseServiceImpl implements IEntrepriseservice {
 	}
 
 	@Override
-	public List<Entreprise> getEntrepriseparuser(Long idUser) {
+	public List<Entreprise> getEntreprisesparuser(Long idUser) {
 		User u =userRepo.findById(idUser).orElse(null);
 		return u.getEntreprise();
+	}
+
+	@Override
+	public Entreprise getentreprisebyuser(Long iduser) {
+		User u = userRepo.findById(iduser).orElse(null);
+		return u.getMagasin().getEntreprise();
 	}
 
 

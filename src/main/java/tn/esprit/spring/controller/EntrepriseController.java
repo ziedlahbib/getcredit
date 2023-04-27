@@ -65,7 +65,13 @@ public class EntrepriseController {
 	@GetMapping("/get-entreprisesparuser/{id-user}")
 	@ResponseBody
 	public List<Entreprise> getEntreprisesparuser(@PathVariable("id-user") Long iduser) {
-		return entrepriseService.getEntrepriseparuser(iduser);
+		return entrepriseService.getEntreprisesparuser(iduser);
+
+	}
+	@GetMapping("/get-entreprise-paruser/{id-user}")
+	@ResponseBody
+	public Entreprise getEntrepriseparuser(@PathVariable("id-user") Long iduser) {
+		return entrepriseService.getentreprisebyuser(iduser);
 
 	}
 	@PutMapping("/affecter-utilisateur-entreprise/{id-user}/{id-ent}")
