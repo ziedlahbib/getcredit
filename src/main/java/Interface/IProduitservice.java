@@ -16,5 +16,6 @@ public interface IProduitservice {
 	public Produit AffichDetailProduit(Long idProduit );
 	public List<Produit> afiichListProduit();
 	public Produit affecterProduitMagasin(Long idProduit ,Long idMagasin);
+	public List<Produit> afiichListProduitbymagasin(Long idmagasin);
 
 }

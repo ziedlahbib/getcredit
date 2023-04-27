@@ -59,6 +59,12 @@ public class ProduitController {
 		return produitServ.afiichListProduit();
 
 	}
+	@GetMapping("/get-produits-bymagasin/{id-magasin}")
+	@ResponseBody
+	public List<Produit> geProduitsbymagasin(@PathVariable("id-magasin") Long idmagasin) {
+		return produitServ.afiichListProduitbymagasin(idmagasin);
+
+	}
 	@PutMapping("/affecter-produit-magasin/{id-magasin}/{id-produit}")
 	@ResponseBody
 	public Produit affecterproduitmagasin(@PathVariable("id-magasin") Long idmagasin,@PathVariable("id-produit") Long idProd) {

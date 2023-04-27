@@ -79,4 +79,10 @@ public class ProduitServiceImpl implements IProduitservice {
 		return produitRepo.save(p);
 	}
 
+	@Override
+	public List<Produit> afiichListProduitbymagasin(Long idmagasin) {
+		Magasin m = magasinRepo.findById(idmagasin).orElse(null);
+		return m.getProduits();
+	}
+
 }
