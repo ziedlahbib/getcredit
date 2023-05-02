@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,7 +70,7 @@ public class PasswordController {
 			passwordResetEmail.setFrom("support@demo.com");
 			passwordResetEmail.setTo(user.getEmail());
 			passwordResetEmail.setSubject("Password Reset Request");
-			passwordResetEmail.setText("To reset your password, click the link below:\n" + appUrl+":8081"
+			passwordResetEmail.setText("To reset your password, click the link below:\n" + appUrl+":4200/#/"
 					+ "/reset?token=" + user.getResetToken());
 			
 			emailService.sendEmail(passwordResetEmail);
@@ -84,12 +85,16 @@ public class PasswordController {
 
 
 	// Process reset password form
-	@PutMapping("/reset")
+	@PutMapping("/reset/{rt}")
 	@ResponseBody
-	public String setNewPassword(@RequestBody User us,@RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
+	public String setNewPassword(@RequestBody String us,
+			//@RequestParam Map<String, String> requestParams,
+			@PathVariable("rt") String rt,
+	 RedirectAttributes redir) {
 
 		// Find the user associated with the reset token
-		Optional<User> user = userService.findUserByResetToken(requestParams.get("token"));
+		//Optional<User> user = userService.findUserByResetToken(requestParams.get("token"));
+		Optional<User> user = userService.findUserByResetToken(rt);
 
 		// This should always be non-null but we check just in case
 		if (user.isPresent()) {
@@ -97,7 +102,7 @@ public class PasswordController {
 			User resetUser = user.get(); 
             
 			// Set new password    
-			resetUser.setPassword(bCryptPasswordEncoder.encode(us.getPassword()));
+			resetUser.setPassword(bCryptPasswordEncoder.encode(us));
 
 			// Set the reset token to null so it cannot be used again
 			resetUser.setResetToken(null);
@@ -120,9 +125,9 @@ public class PasswordController {
    }
    
     // Going to reset page without a token redirects to login page
-	@ExceptionHandler(MissingServletRequestParameterException.class)
-	public ModelAndView handleMissingParams(MissingServletRequestParameterException ex) {
-		return new ModelAndView("redirect:login");
-	}
+//	@ExceptionHandler(MissingServletRequestParameterException.class)
+//	public ModelAndView handleMissingParams(MissingServletRequestParameterException ex) {
+//		return new ModelAndView("redirect:login");
+//	}
 
 }
