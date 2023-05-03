@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -37,4 +38,7 @@ public class Credit implements Serializable {
 	@ManyToOne
 	@JsonIgnore
 	private User user;
+	@OneToOne
+	@JsonIgnore
+	private User agent;
 }

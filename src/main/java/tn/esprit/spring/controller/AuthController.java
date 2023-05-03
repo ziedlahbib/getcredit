@@ -97,7 +97,7 @@ public class AuthController {
 
 
     if (strRoles == null) {
-      Role userRole = roleRepository.findByName(ERole.ROLE_AGENT)
+      Role userRole = roleRepository.findByName(ERole.ROLE_CLIENT)
           .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
       user.setRoles(userRole);
     } else {

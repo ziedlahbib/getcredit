@@ -14,5 +14,7 @@ public interface ICreditservice {
 	public void SupprimerCredit(Long idCredit);
 	public Credit AffichDetailCredit(Long idCredit);
 	public List<Credit> afiichListCredit();
+	public Credit affectercreditToClient(Long idcredit,Long idclient);
+	public Credit affecterCreditToAgent(Long idcredit,Long idAgent);
 
 }
