@@ -51,7 +51,7 @@ public class CreditController {
 		return creditServ.affectercreditToClient(idcredit, idclient);
 
 	}
-	@PutMapping("/affecter-credit-client/{id-credit}/{id-agent}")
+	@PutMapping("/affecter-credit-agent/{id-credit}/{id-agent}")
 	@ResponseBody
 	public Credit affecterCreditToAgent(@PathVariable("id-credit") Long idcredit,@PathVariable("id-agent") Long idagent) {
 		return creditServ.affecterCreditToAgent(idcredit, idagent);
