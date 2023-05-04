@@ -42,4 +42,7 @@ public class Credit implements Serializable {
 	@OneToOne
 	@JsonIgnore
 	private User agent;
+	@ManyToOne
+	@JsonIgnore
+	private Produit produit;
 }

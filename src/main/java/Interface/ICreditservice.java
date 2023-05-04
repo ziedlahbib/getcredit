@@ -16,5 +16,6 @@ public interface ICreditservice {
 	public List<Credit> afiichListCredit();
 	public Credit affectercreditToClient(Long idcredit,Long idclient);
 	public Credit affecterCreditToAgent(Long idcredit,Long idAgent);
+	public Credit affecterCreditToProduit(Long idcredit,Long idproduit);
 
 }

@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import Interface.ICreditservice;
 import tn.esprit.spring.entity.Credit;
+import tn.esprit.spring.entity.Produit;
 import tn.esprit.spring.entity.User;
 import tn.esprit.spring.repository.CreditRepository;
+import tn.esprit.spring.repository.ProduitRepository;
 import tn.esprit.spring.repository.UserRepository;
 
 @Service
@@ -23,7 +25,8 @@ public class CreditServiceImpl implements ICreditservice {
 	CreditRepository creditRepo;
 	@Autowired
 	UserRepository userRepo;
-
+	@Autowired
+	ProduitRepository produitRepo;
 	@Override
 	public Credit AjoutCredit(Credit e) {
 		long miliseconds = System.currentTimeMillis();
@@ -33,6 +36,7 @@ public class CreditServiceImpl implements ICreditservice {
 		calendar.setTime(e.getDateDebut());
 		calendar.add(Calendar.MONTH, e.getNbrdumois());
 		e.setDateFin(calendar.getTime());
+		e.setMontantparmois(e.getMontant()/e.getNbrdumois());
 		return creditRepo.save(e);
 	}
 
@@ -77,6 +81,15 @@ public class CreditServiceImpl implements ICreditservice {
 		Credit c = creditRepo.findById(idcredit).orElse(null);
 		User u = userRepo.findById(idAgent).orElse(null);
 		c.setAgent(u);
+		return creditRepo.save(c);
+	}
+
+	@Override
+	public Credit affecterCreditToProduit(Long idcredit, Long idproduit) {
+		// TODO Auto-generated method stub
+		Credit c = creditRepo.findById(idcredit).orElse(null);
+		Produit p = produitRepo.findById(idproduit).orElse(null);
+		c.setProduit(p);
 		return creditRepo.save(c);
 	}
 
