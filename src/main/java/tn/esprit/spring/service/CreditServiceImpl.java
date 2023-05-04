@@ -1,5 +1,10 @@
 package tn.esprit.spring.service;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +15,7 @@ import tn.esprit.spring.entity.Credit;
 import tn.esprit.spring.entity.User;
 import tn.esprit.spring.repository.CreditRepository;
 import tn.esprit.spring.repository.UserRepository;
+
 @Service
 public class CreditServiceImpl implements ICreditservice {
 
@@ -17,14 +23,22 @@ public class CreditServiceImpl implements ICreditservice {
 	CreditRepository creditRepo;
 	@Autowired
 	UserRepository userRepo;
+
 	@Override
 	public Credit AjoutCredit(Credit e) {
+		long miliseconds = System.currentTimeMillis();
+		Date date = new Date(miliseconds);
+		e.setDateDebut(date);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(e.getDateDebut());
+		calendar.add(Calendar.MONTH, e.getNbrdumois());
+		e.setDateFin(calendar.getTime());
 		return creditRepo.save(e);
 	}
 
 	@Override
 	public Credit UpdateCredit(Credit e, Long idCredit) {
-		Credit c=creditRepo.findById(idCredit).orElse(null);
+		Credit c = creditRepo.findById(idCredit).orElse(null);
 		c.setDateDebut(e.getDateDebut());
 		c.setDateFin(e.getDateFin());
 		c.setMontant(e.getMontant());
@@ -36,12 +50,12 @@ public class CreditServiceImpl implements ICreditservice {
 	@Override
 	public void SupprimerCredit(Long idCredit) {
 		creditRepo.deleteById(idCredit);
-		
+
 	}
 
 	@Override
 	public Credit AffichDetailCredit(Long idCredit) {
-		
+
 		return creditRepo.findById(idCredit).orElse(null);
 	}
 

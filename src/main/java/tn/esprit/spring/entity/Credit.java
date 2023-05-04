@@ -30,6 +30,7 @@ public class Credit implements Serializable {
 	private Long creditId;
 	private Long montant;
 	private Long restapayer;
+	private int nbrdumois;
 	private Long montantparmois;
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
