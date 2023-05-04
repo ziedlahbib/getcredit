@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import Interface.IUserservice;
 import request.ChangePasswordRequest;
 import request.SignupRequest;
+import tn.esprit.spring.entity.Credit;
 import tn.esprit.spring.entity.User;
 
 
@@ -29,6 +30,13 @@ import tn.esprit.spring.entity.User;
 public class UserController {
 	@Autowired
 	IUserservice userServ;
+	
+	@PostMapping("/add-client")
+	@ResponseBody
+	public User addcredit(@RequestBody User u) {
+		return userServ.ajoutclient(u);
+
+	}
 	@PutMapping("/update-password/{id-user}")
 	@ResponseBody
 	public String upadetepassword(@RequestBody ChangePasswordRequest request,@PathVariable("id-user") Long iduser) {

@@ -11,12 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Interface.ICreditservice;
+import lombok.extern.slf4j.Slf4j;
 import tn.esprit.spring.entity.Credit;
 import tn.esprit.spring.entity.Produit;
 import tn.esprit.spring.entity.User;
 import tn.esprit.spring.repository.CreditRepository;
 import tn.esprit.spring.repository.ProduitRepository;
 import tn.esprit.spring.repository.UserRepository;
+@Slf4j
 
 @Service
 public class CreditServiceImpl implements ICreditservice {
@@ -36,7 +38,9 @@ public class CreditServiceImpl implements ICreditservice {
 		calendar.setTime(e.getDateDebut());
 		calendar.add(Calendar.MONTH, e.getNbrdumois());
 		e.setDateFin(calendar.getTime());
-		e.setMontantparmois(e.getMontant()/e.getNbrdumois());
+		long m=e.getMontant()/e.getNbrdumois();
+		log.info("mon"+m);
+		e.setMontantparmois(m);
 		return creditRepo.save(e);
 	}
 

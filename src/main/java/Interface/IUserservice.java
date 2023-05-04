@@ -12,6 +12,7 @@ import request.SignupRequest;
 import tn.esprit.spring.entity.User;
 @Service
 public interface IUserservice {
+	public User ajoutclient(User user);
 	public String updatepassword(ChangePasswordRequest request ,Long idUser);
 	public User resetpassword(User user );
 	public User updateUser(SignupRequest signUpRequest, Long idUser);

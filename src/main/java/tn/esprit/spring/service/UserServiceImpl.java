@@ -204,4 +204,14 @@ public class UserServiceImpl implements IUserservice {
 		
 		return userRepo.userparmagasin(idmagasin) ;
 	}
+
+
+	@Override
+	public User ajoutclient(User user) {
+		Role userRole = roleRepository.findByName(ERole.ROLE_CLIENT).orElseThrow(() -> new RuntimeException("Error: Role is not found."));;
+		user.setRoles(userRole);
+		return  userRepo.save(user);
+		
+		
+	}
 }
