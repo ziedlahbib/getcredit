@@ -19,6 +19,7 @@ public class OCRController {
 	    @PostMapping("/ocr")
 	    public String ocr(@RequestParam("file") MultipartFile file) throws IOException, TesseractException {
 	        File imageFile = convertMultipartFileToFile(file);
+	        tesseract.setDatapath("C:\\Users\\lahbi\\Documents\\GitHub\\getcredit\\tessdata-main");
 	        String result = tesseract.doOCR(imageFile);
 	        return result;
 	    }
