@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -18,40 +19,38 @@ import net.sourceforge.tess4j.TesseractException;
 
 @RestController
 public class OCRController {
-	  private Tesseract tesseract = new Tesseract();
+    private Tesseract tesseract = new Tesseract();
 
-	    @PostMapping("/ocr")
-	    public String ocr(@RequestParam("file") MultipartFile file) throws IOException, TesseractException {
-	        File imageFile = convertMultipartFileToFile(file);
-	        
-	        
-	        System.loadLibrary("opencv_java342");
-	        Mat image = Imgcodecs.imread(imageFile.getAbsolutePath());
+    @PostMapping("/ocr")
+    public String ocr(@RequestParam("file") MultipartFile file) throws IOException, TesseractException {
+        File imageFile = convertMultipartFileToFile(file);
 
-	        // Redimensionner l'image
-	        int height = image.height();
-	        int width = image.width();
-	        double aspectRatio = (double) width / height;
-	        Size newSize = new Size(800, (int) (800 / aspectRatio));
-	        Imgproc.resize(image, image, newSize);
-	        File tempImage = File.createTempFile("tempImage", ".jpg");
+        // Load OpenCV native library
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
-	     // Write the OpenCV Mat object to the file
-	     Imgcodecs.imwrite(tempImage.getAbsolutePath(), image);
-	     
-	     
-	     
-	        tesseract.setDatapath("C:\\Users\\lahbi\\Documents\\GitHub\\getcredit\\tessdata-main");
-	        String result = tesseract.doOCR(tempImage);
-	        return result;
-	    }
+        // Load image using OpenCV
+        Mat image = Imgcodecs.imread(imageFile.getAbsolutePath());
 
-	    private File convertMultipartFileToFile(MultipartFile file) throws IOException {
-	        File convertedFile = new File(file.getOriginalFilename());
-	        FileOutputStream fos = new FileOutputStream(convertedFile);
-	        fos.write(file.getBytes());
-	        fos.close();
-	        return convertedFile;
-	    }
+        // Resize image to a smaller size
+        Size newSize = new Size(800, (int) (800 * (double) image.rows() / image.cols()));
+        Imgproc.resize(image, image, newSize);
 
+        // Save resized image to a temporary file
+        File tempImage = File.createTempFile("tempImage", ".jpg");
+        Imgcodecs.imwrite(tempImage.getAbsolutePath(), image);
+
+        // Perform OCR on the resized image using Tesseract
+        tesseract.setDatapath("C:\\Users\\lahbi\\Documents\\GitHub\\getcredit\\tessdata-main");
+        String result = tesseract.doOCR(tempImage);
+
+        return result;
+    }
+
+    private File convertMultipartFileToFile(MultipartFile file) throws IOException {
+        File convertedFile = new File(file.getOriginalFilename());
+        FileOutputStream fos = new FileOutputStream(convertedFile);
+        fos.write(file.getBytes());
+        fos.close();
+        return convertedFile;
+    }
 }
