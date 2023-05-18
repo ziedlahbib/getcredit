@@ -1,8 +1,11 @@
 package tn.esprit.spring.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -17,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
+
 @RestController
 public class OCRController {
     private Tesseract tesseract = new Tesseract();
@@ -25,23 +29,26 @@ public class OCRController {
     public String ocr(@RequestParam("file") MultipartFile file) throws IOException, TesseractException {
         File imageFile = convertMultipartFileToFile(file);
 
-        // Load OpenCV native library
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-
-        // Load image using OpenCV
-        Mat image = Imgcodecs.imread(imageFile.getAbsolutePath());
-
-        // Resize image to a smaller size
-        Size newSize = new Size(800, (int) (800 * (double) image.rows() / image.cols()));
-        Imgproc.resize(image, image, newSize);
-
-        // Save resized image to a temporary file
-        File tempImage = File.createTempFile("tempImage", ".jpg");
-        Imgcodecs.imwrite(tempImage.getAbsolutePath(), image);
+//        // Load OpenCV native library
+//        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+//
+//        // Load image using OpenCV
+//        Mat image = Imgcodecs.imread(imageFile.getAbsolutePath());
+//
+//        // Resize image to a smaller size
+//        Size newSize = new Size(800, (int) (800 * (double) image.rows() / image.cols()));
+//        Imgproc.resize(image, image, newSize);
+//
+//        // Save resized image to a temporary file
+//        File tempImage = File.createTempFile("tempImage", ".jpg");
+//        Imgcodecs.imwrite(tempImage.getAbsolutePath(), image);
 
         // Perform OCR on the resized image using Tesseract
         tesseract.setDatapath("C:\\Users\\lahbi\\Documents\\GitHub\\getcredit\\tessdata-main");
-        String result = tesseract.doOCR(tempImage);
+//        tesseract.setLanguage("eng");
+//        tesseract.setPageSegMode(11); // set page segmentation mode
+//        tesseract.setTessVariable("user_defined_dpi", "300");
+        String result = tesseract.doOCR(imageFile);
 
         return result;
     }
@@ -53,4 +60,7 @@ public class OCRController {
         fos.close();
         return convertedFile;
     }
+    
+
+    
 }
