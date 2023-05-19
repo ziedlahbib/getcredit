@@ -13,6 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,12 +38,11 @@ public class Credit implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateFin;
 	@ManyToOne
-	@JsonIgnore
+	@JsonManagedReference
 	private User user;
 	@OneToOne
-	@JsonIgnore
+	@JsonManagedReference
 	private User agent;
 	@ManyToOne
-	@JsonIgnore
 	private Produit produit;
 }

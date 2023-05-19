@@ -100,10 +100,10 @@ public class User implements Serializable {
 	
 	
 	@OneToMany(mappedBy = "user")
-	@JsonIgnore
+	@JsonBackReference
 	private List<Credit> credits;
 	@OneToOne(mappedBy = "agent")
-	@JsonIgnore
+	@JsonBackReference
 	private Credit credit;
 	  public User(String username, String email, String password) {
 		    this.username = username;
