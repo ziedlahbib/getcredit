@@ -105,6 +105,13 @@ public class User implements Serializable {
 	@OneToOne(mappedBy = "agent")
 	@JsonBackReference
 	private Credit credit;
+	
+	@OneToMany(mappedBy = "client")
+	@JsonBackReference
+	private List<Creditrefuse> creditsref;
+	@OneToOne(mappedBy = "agent")
+	@JsonBackReference
+	private Creditrefuse creditref;
 	  public User(String username, String email, String password) {
 		    this.username = username;
 		    this.email = email;
