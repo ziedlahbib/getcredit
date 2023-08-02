@@ -12,7 +12,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,7 +26,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "creditId")
 public class Creditrefuse implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long creditId;
@@ -37,11 +41,9 @@ public class Creditrefuse implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dateFin;
 	@ManyToOne
-	@JsonManagedReference
 	private User client;
-	@OneToOne
-	@JsonManagedReference
-	private User agent;
+	@ManyToOne
+	private User agentr;
 	@ManyToOne
 	private Produit produit;
 
