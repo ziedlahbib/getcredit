@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -42,8 +43,9 @@ public class Creditrefuse implements Serializable {
 	private Date dateFin;
 	@ManyToOne
 	private User client;
-	@ManyToOne
-	private User agentr;
+    @ManyToOne
+    @JoinColumn(name = "agentr_id") // Specify the join column name explicitly
+    private User agentr;
 	@ManyToOne
 	private Produit produit;
 

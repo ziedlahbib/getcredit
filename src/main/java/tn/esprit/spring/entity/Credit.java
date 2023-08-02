@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -43,8 +44,9 @@ public class Credit implements Serializable {
 	private Date dateFin;
 	@ManyToOne
 	private User user;
-	@ManyToOne
-	private User agent;
+    @ManyToOne
+    @JoinColumn(name = "agent_id") // Specify the join column name explicitly
+    private User agent;
 	@ManyToOne
 	private Produit produit;
 }

@@ -104,9 +104,9 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "agent")
 	private List<Credit> credit;
 	
-	@OneToMany(mappedBy = "client")
+	@ManyToMany(mappedBy = "client")
 	private List<Creditrefuse> creditsref;
-	@OneToMany(mappedBy = "agentr")
+	@ManyToMany(mappedBy = "agentr")
 	private List<Creditrefuse> creditref;
 	  public User(String username, String email, String password) {
 		    this.username = username;

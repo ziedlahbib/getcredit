@@ -84,6 +84,7 @@ public class CreditServiceImpl implements ICreditservice {
 	public Credit affecterCreditToAgent(Long idcredit, Long idAgent) {
 		Credit c = creditRepo.findById(idcredit).orElse(null);
 		User u = userRepo.findById(idAgent).orElse(null);
+		System.out.println("sss"+u.getId());
 		c.setAgent(u);
 		return creditRepo.save(c);
 	}
