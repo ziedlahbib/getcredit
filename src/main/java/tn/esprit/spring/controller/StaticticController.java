@@ -41,4 +41,16 @@ public class StaticticController {
 		return statserv.nbrcreditparent(ident);
 
 	}
+	@GetMapping("/get-creditref-mag/{id-mag}")
+	@ResponseBody
+	public float nbrcreditrefpamag(@PathVariable("id-mag") Long idmag) {
+		return statserv.nbrcreditrefparmag(idmag);
+
+	}
+	@GetMapping("/get-credit-mag/{id-mag}")
+	@ResponseBody
+	public float nbrcreditpamag(@PathVariable("id-mag") Long idmag) {
+		return statserv.nbrcreditparmag(idmag);
+
+	}
 }

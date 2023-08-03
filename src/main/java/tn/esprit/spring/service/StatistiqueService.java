@@ -63,4 +63,32 @@ public class StatistiqueService {
 		return n;
 		
 	}
+	public float nbrcreditrefparmag(Long idmag) {
+		List<Creditrefuse> crf= creditRefuseRepo.findAll();
+		int n=0;
+		for(Creditrefuse cf:crf) {
+				if(cf.getAgentr().getMagasin().getMagasinId()==idmag) {
+					n++;
+					log.info("nbrcrditent"+n);
+				}
+			
+			
+		}
+		return n;
+		
+	}
+	public float nbrcreditparmag(Long idmag) {
+		List<Credit> crf= creditRepo.findAll();
+		int n=0;
+		for(Credit cf:crf) {
+				if(cf.getAgent().getMagasin().getMagasinId()==idmag) {
+					n++;
+					log.info("nbrcrditent"+n);
+				}
+			
+			
+		}
+		return n;
+		
+	}
 }
