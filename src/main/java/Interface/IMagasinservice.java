@@ -18,6 +18,7 @@ public interface IMagasinservice {
 	public List<Magasin> getlistMagasinparEntreprise(Long idEnt);
 	public Magasin getmagasinbyagent(Long idUser);
 	public List<Magasin> getListMagasinByUser(Long idUser);
+	public List<Magasin> getListMagasinByENtrepreneur(Long idUser);
 
 
 }

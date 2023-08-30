@@ -1,5 +1,6 @@
 package tn.esprit.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,19 @@ public class MagasinServiceImpl implements IMagasinservice {
 		User u = userRepo.findById(idUser).orElse(null);
 		
 		return u.getMagasin().getEntreprise().getMagasins();
+	}
+
+	@Override
+	public List<Magasin> getListMagasinByENtrepreneur(Long idUser) {
+		User u = userRepo.findById(idUser).orElse(null);
+		List<Magasin> lsm = new ArrayList<Magasin>();
+		for(Entreprise e : u.getEntreprise()) {
+			for(Magasin m : e.getMagasins()) {
+				lsm.add(m);
+			}
+			
+		}
+		return lsm;
 	}
 
 }
