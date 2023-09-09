@@ -38,7 +38,17 @@ public class CreditRefuseServiceImpl implements IcreditRefuseService{
 		e.setMontantparmois(m);
 		return creditRefuseRepo.save(e);
 	}
-
+	@Override
+	public Creditrefuse UpdateCredit(Credit e, Long idCredit) {
+		Creditrefuse c = creditRefuseRepo.findById(idCredit).orElse(null);
+		c.setDateDebut(e.getDateDebut());
+		c.setDateFin(e.getDateFin());
+		c.setMontant(e.getMontant());
+		c.setMontantparmois(e.getMontantparmois());
+		c.setRestapayer(e.getRestapayer());
+		c.setIban(e.getIban());
+		return creditRefuseRepo.save(c);
+	}
 	@Override
 	public Creditrefuse AffichDetailCredit(Long idCredit) {
 		return creditRefuseRepo.findById(idCredit).orElse(null);

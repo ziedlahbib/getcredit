@@ -52,6 +52,7 @@ public class CreditServiceImpl implements ICreditservice {
 		c.setMontant(e.getMontant());
 		c.setMontantparmois(e.getMontantparmois());
 		c.setRestapayer(e.getRestapayer());
+		c.setIban(e.getIban());
 		return creditRepo.save(c);
 	}
 

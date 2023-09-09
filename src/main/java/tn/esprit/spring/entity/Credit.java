@@ -35,6 +35,7 @@ public class Credit implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long creditId;
 	private Long montant;
+	private String iban;
 	private Long restapayer;
 	private int nbrdumois;
 	private Long montantparmois;
