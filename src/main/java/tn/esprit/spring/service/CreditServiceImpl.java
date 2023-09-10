@@ -38,7 +38,7 @@ public class CreditServiceImpl implements ICreditservice {
 		calendar.setTime(e.getDateDebut());
 		calendar.add(Calendar.MONTH, e.getNbrdumois());
 		e.setDateFin(calendar.getTime());
-		long m=e.getMontant()/e.getNbrdumois();
+		float m=e.getMontant()/e.getNbrdumois();
 		log.info("mon"+m);
 		e.setMontantparmois(m);
 		return creditRepo.save(e);
@@ -47,12 +47,17 @@ public class CreditServiceImpl implements ICreditservice {
 	@Override
 	public Credit UpdateCredit(Credit e, Long idCredit) {
 		Credit c = creditRepo.findById(idCredit).orElse(null);
-		c.setDateDebut(e.getDateDebut());
-		c.setDateFin(e.getDateFin());
-		c.setMontant(e.getMontant());
-		c.setMontantparmois(e.getMontantparmois());
-		c.setRestapayer(e.getRestapayer());
+		c.setDateDebut(c.getDateDebut());
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(c.getDateDebut());
+		calendar.add(Calendar.MONTH, e.getNbrdumois());
+		c.setDateFin(calendar.getTime());
+		float m=e.getMontant()/e.getNbrdumois();
+		log.info("mon"+m);
+		c.setNbrdumois(e.getNbrdumois());
+		c.setMontantparmois(m);
 		c.setIban(e.getIban());
+		c.setMontant(e.getMontant());
 		return creditRepo.save(c);
 	}
 

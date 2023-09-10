@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import Interface.IMagasinservice;
 import tn.esprit.spring.entity.Credit;
 import tn.esprit.spring.entity.Magasin;
+import tn.esprit.spring.entity.Produit;
 import tn.esprit.spring.service.CreditServiceImpl;
 
 @CrossOrigin(origins = "http://localhost:4200/",exposedHeaders="Access-Control-Allow-Origin" )
@@ -31,7 +32,12 @@ public class CreditController {
 		return creditServ.AjoutCredit(u);
 
 	}
-	
+	@PutMapping("/update-credit/{id-credit}")
+	@ResponseBody
+	public Credit upadateProduit(@RequestBody Credit u,@PathVariable("id-credit") Long idcredit) {
+		return creditServ.UpdateCredit(u, idcredit);
+
+	}
 	@GetMapping("/get-credit/{id-credit}")
 	@ResponseBody
 	public Credit getmagasinbyid(@PathVariable("id-credit") Long idcredit) {

@@ -34,12 +34,12 @@ public class CreditRefuseServiceImpl implements IcreditRefuseService{
 		calendar.setTime(e.getDateDebut());
 		calendar.add(Calendar.MONTH, e.getNbrdumois());
 		e.setDateFin(calendar.getTime());
-		long m=e.getMontant()/e.getNbrdumois();
+		float m=e.getMontant()/e.getNbrdumois();
 		e.setMontantparmois(m);
 		return creditRefuseRepo.save(e);
 	}
 	@Override
-	public Creditrefuse UpdateCredit(Credit e, Long idCredit) {
+	public Creditrefuse UpdateCredit(Creditrefuse e, Long idCredit) {
 		Creditrefuse c = creditRefuseRepo.findById(idCredit).orElse(null);
 		c.setDateDebut(e.getDateDebut());
 		c.setDateFin(e.getDateFin());

@@ -33,11 +33,11 @@ public class Creditrefuse implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long creditId;
-	private Long montant;
+	private float montant;
 	private String iban;
 	private Long restapayer;
 	private int nbrdumois;
-	private Long montantparmois;
+	private float montantparmois;
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
 	@Temporal(TemporalType.DATE)

@@ -70,7 +70,7 @@ public class User implements Serializable {
 	
 	private Boolean active;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	  @JoinTable(  name = "user_roles", 
 	        joinColumns = @JoinColumn(name = "user_id"), 
 	        inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -90,7 +90,7 @@ public class User implements Serializable {
 	@JsonIgnore
 	private User entrepreneur;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Entreprise> entreprise;
 	

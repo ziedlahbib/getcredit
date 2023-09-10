@@ -7,7 +7,7 @@ import tn.esprit.spring.entity.Creditrefuse;
 
 public interface IcreditRefuseService {
 	public Creditrefuse AjoutCredit(Creditrefuse e);
-	public Creditrefuse UpdateCredit(Credit e, Long idCredit);
+	public Creditrefuse UpdateCredit(Creditrefuse e, Long idCredit);
 	public Creditrefuse AffichDetailCredit(Long idCredit);
 	public List<Creditrefuse> afiichListCredit();
 	public Creditrefuse affectercreditToClient(Long idcredit,Long idclient);
