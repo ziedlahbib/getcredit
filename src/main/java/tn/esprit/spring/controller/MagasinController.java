@@ -52,7 +52,12 @@ public class MagasinController {
 		return magasinServ.AffichDetailMagasin(idmagasin);
 
 	}
-	
+	@GetMapping("/get-magasin-par-produit/{id-produit}")
+	@ResponseBody
+	public Magasin getmagasinbyproduit(@PathVariable("id-produit") Long idproduit) {
+		return magasinServ.getmagasinbyproduit(idproduit);
+
+	}
 	@GetMapping("/get-magasins")
 	@ResponseBody
 	public List<Magasin> getmagasins() {

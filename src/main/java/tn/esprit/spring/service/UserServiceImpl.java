@@ -110,7 +110,8 @@ public class UserServiceImpl implements IUserservice {
 	}
 	@Override
 	public void deleteUser(Long idUser) {
-
+		User u =userRepo.findById(idUser).orElse(null);
+		u.setRoles(null);
 		userRepo.deleteById(idUser);;
 		
 	}

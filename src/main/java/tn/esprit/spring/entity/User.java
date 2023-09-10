@@ -70,7 +70,7 @@ public class User implements Serializable {
 	
 	private Boolean active;
 	
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	  @JoinTable(  name = "user_roles", 
 	        joinColumns = @JoinColumn(name = "user_id"), 
 	        inverseJoinColumns = @JoinColumn(name = "role_id"))
