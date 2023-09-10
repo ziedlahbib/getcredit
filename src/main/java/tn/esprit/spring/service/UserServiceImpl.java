@@ -95,6 +95,16 @@ public class UserServiceImpl implements IUserservice {
 
 
 	@Override
+	public User updateclient(User user, Long idUser) {
+		User u =userRepo.findById(idUser).orElse(null);
+		u.setAdresse(user.getAdresse());
+		u.setNom(user.getNom());
+		u.setPrenom(user.getPrenom());
+		u.setEmail(user.getEmail());
+		u.setTel(user.getTel());
+		return userRepo.save(u);
+	}
+	@Override
 	public User resetpassword(User user) {	
 		return userRepo.save(user);
 	}
@@ -214,4 +224,6 @@ public class UserServiceImpl implements IUserservice {
 		
 		
 	}
+
+
 }

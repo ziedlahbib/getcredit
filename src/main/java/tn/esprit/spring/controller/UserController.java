@@ -19,6 +19,7 @@ import Interface.IUserservice;
 import request.ChangePasswordRequest;
 import request.SignupRequest;
 import tn.esprit.spring.entity.Credit;
+import tn.esprit.spring.entity.Produit;
 import tn.esprit.spring.entity.User;
 
 
@@ -35,6 +36,12 @@ public class UserController {
 	@ResponseBody
 	public User addcredit(@RequestBody User u) {
 		return userServ.ajoutclient(u);
+
+	}
+	@PutMapping("/update-client/{id-client}")
+	@ResponseBody
+	public User upadateProduit(@RequestBody User u,@PathVariable("id-client") Long idclient) {
+		return userServ.updateclient(u, idclient);
 
 	}
 	@PutMapping("/update-password/{id-user}")

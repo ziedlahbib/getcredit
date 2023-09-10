@@ -16,6 +16,7 @@ public interface IUserservice {
 	public String updatepassword(ChangePasswordRequest request ,Long idUser);
 	public User resetpassword(User user );
 	public User updateUser(SignupRequest signUpRequest, Long idUser);
+	public User updateclient(User user, Long idUser);
 	public void deleteUser(Long idUser);
 	public User affichDetailUser(Long idUser);
 	public List<User> affichUser();
