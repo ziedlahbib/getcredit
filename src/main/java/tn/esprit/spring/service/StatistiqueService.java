@@ -39,7 +39,7 @@ public class StatistiqueService {
 		List<Creditrefuse> crf= creditRefuseRepo.findAll();
 		int n=0;
 		for(Creditrefuse cf:crf) {
-				if(cf.getAgentr().getMagasin().getEntreprise().getEntrpriseId()==ident) {
+				if(cf.getProduit().getMagasin().getEntreprise().getEntrpriseId()==ident) {
 					n++;
 					log.info("nbrcrditent"+n);
 				}
@@ -53,7 +53,7 @@ public class StatistiqueService {
 		List<Credit> c= creditRepo.findAll();
 		int n=0;
 		for(Credit cr:c) {
-				if(cr.getAgent().getMagasin().getEntreprise().getEntrpriseId()==ident) {
+				if(cr.getProduit().getMagasin().getEntreprise().getEntrpriseId()==ident) {
 					n++;
 					log.info("nbrcrditent"+n);
 				}
@@ -67,7 +67,7 @@ public class StatistiqueService {
 		List<Creditrefuse> crf= creditRefuseRepo.findAll();
 		int n=0;
 		for(Creditrefuse cf:crf) {
-				if(cf.getAgentr().getMagasin().getMagasinId()==idmag) {
+				if(cf.getProduit().getMagasin().getMagasinId()==idmag) {
 					n++;
 					log.info("nbrcrditent"+n);
 				}
@@ -81,7 +81,7 @@ public class StatistiqueService {
 		List<Credit> crf= creditRepo.findAll();
 		int n=0;
 		for(Credit cf:crf) {
-				if(cf.getAgent().getMagasin().getMagasinId()==idmag) {
+				if(cf.getProduit().getMagasin().getMagasinId()==idmag) {
 					n++;
 					log.info("nbrcrditent"+n);
 				}
