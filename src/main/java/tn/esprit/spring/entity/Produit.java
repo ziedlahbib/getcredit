@@ -32,7 +32,7 @@ public class Produit implements Serializable {
 	private Long produitId;
 	private String nom;
 	private String reference;
-	private Long prix;
+	private float prix;
 	@ManyToOne
 	@JsonIgnore
 	private Magasin magasin;
