@@ -124,7 +124,7 @@ public class AuthController {
     }
 
 
-    user.setActive(signUpRequest.getActive());
+    user.setActive(true);
     user.setNom(signUpRequest.getNom());
     user.setPrenom(signUpRequest.getPrenom());
     user.setTel(signUpRequest.getTel());
