@@ -157,12 +157,12 @@ public class UserServiceImpl implements IUserservice {
 	        if (verifyPassword(u, changePasswordRequest.getOldpassword())) {
 	        	u.setPassword(passwordEncoder().encode(changePasswordRequest.getNewpassword()));
 	        	userRepo.save(u);
-	        	return "Password updated successfully";
+	        	return "Mot de passe mis à jour avec succès";
 
 	        }
 	        
 	        else {
-	            return "Invalid old password";
+	            return "Ancien mot de passe invalide";
 	        }
 	   }
 	

@@ -69,14 +69,14 @@ public class PasswordController {
 			SimpleMailMessage passwordResetEmail = new SimpleMailMessage();
 			passwordResetEmail.setFrom("support@demo.com");
 			passwordResetEmail.setTo(user.getEmail());
-			passwordResetEmail.setSubject("Password Reset Request");
-			passwordResetEmail.setText("To reset your password, click the link below:\n" + appUrl+":4200/#/"
+			passwordResetEmail.setSubject("Demande de réinitialisation du mot de passe");
+			passwordResetEmail.setText("Pour réinitialiser votre mot de passe, cliquez sur le lien ci-dessous:\n" + appUrl+":4200/#/"
 					+ "/reset?token=" + user.getResetToken());
 			
 			emailService.sendEmail(passwordResetEmail);
 
 			// Add success message to view
-			return("successMessage, A password reset link has been sent to " + userEmail);
+			return("successMessage, Un lien de réinitialisation du mot de passe a été envoyé à " + userEmail);
 		}
 
 
@@ -114,10 +114,10 @@ public class PasswordController {
 			// RedirectAttributes
 
 
-			return ("successMessage, You have successfully reset your password.  You may now login.");
+			return ("successMessage, Vous avez réinitialisé avec succès votre mot de passe.");
 			
 		} else {
-			return ("errorMessage, Oops!  This is an invalid password reset link.");
+			return ("errorMessage, Oops!  Ceci est un lien de réinitialisation de mot de passe invalide.");
 
 		}
 		
