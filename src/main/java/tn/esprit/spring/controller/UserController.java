@@ -82,6 +82,12 @@ public class UserController {
 		return userServ.findbyusername(username);
 
 	}
+	@GetMapping("/get-userbyemail/{email}")
+	@ResponseBody
+	public Optional<User> getbyuseremail(@PathVariable("email") String email) {
+		return userServ.findUserByEmail(email);
+
+	}
 	@PutMapping("/affecter-file-utilisateur/{id-user}/{id-file}")
 	@ResponseBody
 	public User affecterfileutilisateur(@PathVariable("id-user") Long iduser,@PathVariable("id-file") Long idfile) {
