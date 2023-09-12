@@ -100,13 +100,17 @@ public class User implements Serializable {
 	
 	
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private List<Credit> credits;
 	@OneToMany(mappedBy = "agent")
+	@JsonIgnore
 	private List<Credit> credit;
 	
 	@ManyToMany(mappedBy = "client")
+	@JsonIgnore
 	private List<Creditrefuse> creditsref;
 	@ManyToMany(mappedBy = "agentr")
+	@JsonIgnore
 	private List<Creditrefuse> creditref;
 	  public User(String username, String email, String password) {
 		    this.username = username;

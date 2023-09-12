@@ -46,7 +46,6 @@ public class Credit implements Serializable {
 	@ManyToOne
 	private User user;
     @ManyToOne
-    @JoinColumn(name = "agent_id") // Specify the join column name explicitly
     private User agent;
 	@ManyToOne
 	private Produit produit;
