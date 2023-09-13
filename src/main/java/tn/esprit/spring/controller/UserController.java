@@ -50,7 +50,18 @@ public class UserController {
 		return userServ.updatepassword(request, iduser);
 
 	}
+	@PutMapping("/activer-user/{id-user}")
+	@ResponseBody
+	public User activeruser(@PathVariable("id-user") Long iduser) {
+		return userServ.activer( iduser);
 
+	}
+	@PutMapping("/desactiver-user/{id-user}")
+	@ResponseBody
+	public User desactiveruser(@PathVariable("id-user") Long iduser) {
+		return userServ.desactiver( iduser);
+
+	}
 
 	@PutMapping("/update-utilisateur/{id-user}")
 	@ResponseBody

@@ -227,4 +227,20 @@ public class UserServiceImpl implements IUserservice {
 	}
 
 
+	@Override
+	public User activer(Long iduser) {
+		User u = userRepo.findById(iduser).orElse(null);
+		u.setActive(true);
+		return userRepo.save(u);
+	}
+
+
+	@Override
+	public User desactiver(Long iduser) {
+		User u = userRepo.findById(iduser).orElse(null);
+		u.setActive(false);
+		return userRepo.save(u);
+	}
+
+
 }
