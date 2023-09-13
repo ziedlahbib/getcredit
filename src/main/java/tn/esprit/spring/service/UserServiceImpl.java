@@ -60,36 +60,36 @@ public class UserServiceImpl implements IUserservice {
 		u.setPrenom(signUpRequest.getPrenom());
 		u.setTel(signUpRequest.getTel());
 		u.setUsername(signUpRequest.getUsername());
-		u.setActive(signUpRequest.getActive());
-		String strRoles = signUpRequest.getRole();
+//		u.setActive(signUpRequest.getActive());
+//		String strRoles = signUpRequest.getRole();
+//
+//
+//	    if (strRoles == null) {
+//	      Role userRole = roleRepository.findByName(ERole.ROLE_AGENT)
+//	          .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+//	      u.setRoles(userRole);
+//	    } else {
+//
+//	        switch (strRoles) {
+//	        case "entrepreneur":
+//	          Role entrepreneurRole = roleRepository.findByName(ERole.ROLE_ENTREPRENEUR)
+//	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+//	          u.setRoles(entrepreneurRole);
+//
+//	          break;
+//	        case "admin":
+//	          Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+//	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+//	          u.setRoles(adminRole);
+//
+//	          break;
+//	        default:
+//	          Role agentRole = roleRepository.findByName(ERole.ROLE_AGENT)
+//	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+//	          u.setRoles(agentRole);;
+//	        }
 
-
-	    if (strRoles == null) {
-	      Role userRole = roleRepository.findByName(ERole.ROLE_AGENT)
-	          .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-	      u.setRoles(userRole);
-	    } else {
-
-	        switch (strRoles) {
-	        case "entrepreneur":
-	          Role entrepreneurRole = roleRepository.findByName(ERole.ROLE_ENTREPRENEUR)
-	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-	          u.setRoles(entrepreneurRole);
-
-	          break;
-	        case "admin":
-	          Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-	          u.setRoles(adminRole);
-
-	          break;
-	        default:
-	          Role agentRole = roleRepository.findByName(ERole.ROLE_AGENT)
-	              .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-	          u.setRoles(agentRole);;
-	        }
-
-	    }
+//	    }
     	return userRepo.save(u);
 	}
 
