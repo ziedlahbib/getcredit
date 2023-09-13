@@ -1,6 +1,7 @@
 package tn.esprit.spring.service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,12 +25,14 @@ import Interface.IUserservice;
 import lombok.extern.slf4j.Slf4j;
 import request.ChangePasswordRequest;
 import request.SignupRequest;
+import tn.esprit.spring.entity.Banned;
 import tn.esprit.spring.entity.ERole;
 import tn.esprit.spring.entity.Entreprise;
 import tn.esprit.spring.entity.FileDB;
 import tn.esprit.spring.entity.Magasin;
 import tn.esprit.spring.entity.Role;
 import tn.esprit.spring.entity.User;
+import tn.esprit.spring.repository.BannedRepository;
 import tn.esprit.spring.repository.EntrepriseRepository;
 import tn.esprit.spring.repository.FileDBRepository;
 import tn.esprit.spring.repository.UserRepository;
@@ -50,6 +53,8 @@ public class UserServiceImpl implements IUserservice {
 	 EntrepriseRepository entRepo;
 	 @Autowired
 	 MagasinRepository magRepo;
+	 @Autowired
+	 BannedRepository banRepo;
 
 	@Override
 	public User updateUser(SignupRequest signUpRequest, Long idUser) {
@@ -230,7 +235,23 @@ public class UserServiceImpl implements IUserservice {
 	@Override
 	public User activer(Long iduser) {
 		User u = userRepo.findById(iduser).orElse(null);
+		List<Banned> lsb=banRepo.findAll();
+		List<User> lsu =new ArrayList<User>();
+		for(Banned b :lsb) {
+			lsu.add(b.getUser());
+		}
 		u.setActive(true);
+		if(u.getRoles().getName()==ERole.ROLE_ENTREPRENEUR) {
+			for(User us :u.getAgents()) {
+
+					if(!lsu.contains(us)) {
+						us.setActive(true);
+						userRepo.save(us);
+					}
+				
+				
+			}
+		}
 		return userRepo.save(u);
 	}
 
@@ -238,7 +259,16 @@ public class UserServiceImpl implements IUserservice {
 	@Override
 	public User desactiver(Long iduser) {
 		User u = userRepo.findById(iduser).orElse(null);
+		Banned b=new Banned();
 		u.setActive(false);
+		b.setUser(u);
+		banRepo.save(b);
+		if(u.getRoles().getName()==ERole.ROLE_ENTREPRENEUR) {
+			for(User us :u.getAgents()) {
+				us.setActive(false);
+				userRepo.save(us);
+			}
+		}
 		return userRepo.save(u);
 	}
 
