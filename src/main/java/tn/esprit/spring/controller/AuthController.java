@@ -27,13 +27,16 @@ import request.SignupRequest;
 import response.JwtResponse;
 import response.MessageResponse;
 import tn.esprit.spring.repository.UserRepository;
+import tn.esprit.spring.service.CreditServiceImpl;
 import tn.esprit.spring.service.UserDetailsImpl;
 import tn.esprit.spring.entity.ERole;
 import tn.esprit.spring.entity.Role;
 import tn.esprit.spring.entity.User;
+import tn.esprit.spring.message.ResponseMessage;
 import tn.esprit.spring.repository.RoleRepository;
 import jwt.JwtUtils;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/auth")
@@ -61,17 +64,26 @@ public class AuthController {
 
     SecurityContextHolder.getContext().setAuthentication(authentication);
     String jwt = jwtUtils.generateJwtToken(authentication);
-    
-    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();    
-    List<String> roles = userDetails.getAuthorities().stream()
-        .map(item -> item.getAuthority())
-        .collect(Collectors.toList());
+ 
+    UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();  
+    User u=userRepository.findById(userDetails.getId()).orElse(null);
+    log.info("ss"+u.getId());
+    ResponseMessage customResponse = new ResponseMessage("Ce compte est désactivé");
+    if(u.getActive()==false) {
+    	return ResponseEntity.ok(customResponse);
+    }
+    else {
+    	List<String> roles = userDetails.getAuthorities().stream()
+    	        .map(item -> item.getAuthority())
+    	        .collect(Collectors.toList());
 
-    return ResponseEntity.ok(new JwtResponse(jwt, 
-                         userDetails.getId(), 
-                         userDetails.getUsername(), 
-                         userDetails.getEmail(), 
-                         roles));
+    	    return ResponseEntity.ok(new JwtResponse(jwt, 
+    	                         userDetails.getId(), 
+    	                         userDetails.getUsername(), 
+    	                         userDetails.getEmail(), 
+    	                         roles));
+    }
+    
   }
 
   @PostMapping("/signup")
