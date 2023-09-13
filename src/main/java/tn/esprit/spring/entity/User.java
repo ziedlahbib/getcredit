@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -87,7 +88,6 @@ public class User implements Serializable {
 	private List<User> agents;
 	
 	@ManyToOne
-	@JsonIgnore
 	private User entrepreneur;
 	
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)

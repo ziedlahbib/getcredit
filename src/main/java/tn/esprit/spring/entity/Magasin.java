@@ -38,7 +38,6 @@ public class Magasin implements Serializable {
 	private List<Produit> produits;
 	
 	@ManyToOne
-	@JsonIgnore
 	private Entreprise entreprise;
 
 }
