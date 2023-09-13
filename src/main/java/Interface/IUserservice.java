@@ -29,6 +29,6 @@ public interface IUserservice {
 	public List<User> getusersbyEntrepreneur(Long idEnt);
 	public List<User> getusersbyagent(Long idagent);
 	public List<User> getusersbymagasin(Long idmagasin);
-	public User activer(Long iduser);
-	public User desactiver(Long iduser);
+	public void activer(Long iduser);
+	public void desactiver(Long iduser);
 }

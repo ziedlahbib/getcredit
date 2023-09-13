@@ -113,6 +113,7 @@ public class User implements Serializable {
 	@JsonIgnore
 	private List<Creditrefuse> creditref;
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private List<Banned> ban;
 	  public User(String username, String email, String password) {
 		    this.username = username;

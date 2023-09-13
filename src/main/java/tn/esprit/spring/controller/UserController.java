@@ -52,14 +52,14 @@ public class UserController {
 	}
 	@PutMapping("/activer-user/{id-user}")
 	@ResponseBody
-	public User activeruser(@PathVariable("id-user") Long iduser) {
-		return userServ.activer( iduser);
+	public void activeruser(@PathVariable("id-user") Long iduser) {
+		 userServ.activer( iduser);
 
 	}
 	@PutMapping("/desactiver-user/{id-user}")
 	@ResponseBody
-	public User desactiveruser(@PathVariable("id-user") Long iduser) {
-		return userServ.desactiver( iduser);
+	public void desactiveruser(@PathVariable("id-user") Long iduser) {
+		 userServ.desactiver( iduser);
 
 	}
 

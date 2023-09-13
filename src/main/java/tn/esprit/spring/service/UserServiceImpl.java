@@ -233,7 +233,7 @@ public class UserServiceImpl implements IUserservice {
 
 
 	@Override
-	public User activer(Long iduser) {
+	public void activer(Long iduser) {
 		User u = userRepo.findById(iduser).orElse(null);
 		List<Banned> lsb=banRepo.findAll();
 		List<User> lsu =new ArrayList<User>();
@@ -241,25 +241,30 @@ public class UserServiceImpl implements IUserservice {
 			lsu.add(b.getUser());
 		}
 		u.setActive(true);
+		for(Banned b :u.getBan()) {
+//			b.setUser(null);
+			banRepo.deleteById(b.getId());
+		}
 		if(u.getRoles().getName()==ERole.ROLE_ENTREPRENEUR) {
 			for(User us :u.getAgents()) {
-
 					if(!lsu.contains(us)) {
 						us.setActive(true);
-						userRepo.save(us);
+						userRepo.save(us);							
+						}
+					
 					}
-				
-				
-			}
-		}
-		return userRepo.save(u);
-	}
+				}
+				}
+		
+		
+	
 
 
 	@Override
-	public User desactiver(Long iduser) {
+	public void desactiver(Long iduser) {
 		User u = userRepo.findById(iduser).orElse(null);
 		Banned b=new Banned();
+		
 		u.setActive(false);
 		b.setUser(u);
 		banRepo.save(b);
@@ -269,7 +274,7 @@ public class UserServiceImpl implements IUserservice {
 				userRepo.save(us);
 			}
 		}
-		return userRepo.save(u);
+		
 	}
 
 
