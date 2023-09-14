@@ -211,7 +211,28 @@ public class UserServiceImpl implements IUserservice {
 	public List<User> getusersbyagent(Long idagent) {
 		User a = userRepo.findById(idagent).orElse(null);
 		User ent = a.getEntrepreneur();
-		return ent.getAgents();
+		List<Magasin> lsm =new ArrayList<Magasin>();
+		List <User> lue =new ArrayList<User>();
+		//List <User> l = ent.getAgents();
+
+		for(Entreprise e:ent.getEntreprise()) {
+			for(Magasin m :e.getMagasins()) {
+				if(a.getMagasin().getEntreprise().getEntrpriseId()==m.getEntreprise().getEntrpriseId()) {
+					lsm.add(m);
+				}
+			}
+			
+		}
+		
+		for(Magasin m :lsm) {
+			log.info("ssss"+m.getMagasinId());
+			List <User> lum = this.getusersbymagasin(m.getMagasinId());
+
+				lue.addAll(lum);
+			
+			
+		}
+		return lue;
 	}
 
 
